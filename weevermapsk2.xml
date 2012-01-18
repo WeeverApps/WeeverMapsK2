@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="k2" method="upgrade">
+	<name>Weever Maps for K2</name>
+	<author>Robert Gerald Porter</author>
+	<creationDate>January 17, 2012</creationDate>
+	<copyright>Copyright (c) 2012 Weever Apps Inc. All rights reserved.</copyright>
+	<authorEmail>rob@weeverapps.com</authorEmail>
+	<authorUrl>http://weeverapps.com/</authorUrl>
+	<version>0.1</version>
+	<license>GPL v3</license>
+	<description>Adds geotagged data to K2 content.</description>
+	<files>
+		<filename plugin="weevermapsk2">weevermapsk2.php</filename>
+	</files>
+	
+	<params group="item-content">
+		<param name="latitude_item" type="text" size="20" default="" label="Latitude" description="The latitude of the GPS coordinates." />
+		<param name="longitude_item" type="text" size="20" default="" label="Longitude" description="The longitude of the GPS coordinates." />
+	</params>
+
+</install>
