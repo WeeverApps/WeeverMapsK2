@@ -23,7 +23,8 @@
 	</languages>
 	
 	<media destination="plg_weevermapsk2" folder="assets">
-		<filename>weevermapsk2.js</filename>
+		<filename>jq.ready.js</filename>
+		<filename>wmx.js</filename>
 		<filename>weevermapsk2.css</filename>
 		<filename>jquery.ui.css</filename>
 		<folder>images</folder>

@@ -36,7 +36,8 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		JPlugin::loadLanguage('plg_k2_'.$this->pluginName, JPATH_ADMINISTRATOR);
 		$document = &JFactory::getDocument();
 		$document->addScript( 'http://maps.googleapis.com/maps/api/js?sensor=false' );
-		$document->addScript( '/media/plg_weevermapsk2/weevermapsk2.js' );
+		$document->addScript( '/media/plg_weevermapsk2/wmx.js' );
+		$document->addScript( '/media/plg_weevermapsk2/jq.ready.js' );
 
 		$document->addStyleSheet('/media/plg_weevermapsk2/weevermapsk2.css', 'text/css', null, array());
 		$document->addStyleSheet('/media/plg_weevermapsk2/jquery.ui.css', 'text/css', null, array());
@@ -44,7 +45,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		echo "<div id='wmx-dialog' title='&lt;img id=&quot;wmx-logo&quot; src=&quot;/media/plg_weevermapsk2/images/weever.png&quot;&gt; ".$this->pluginNameHumanReadable." v".$this->pluginVersion."'>
 				<div id='wmx-address'>
 					<input type='text' id='wmx-address-input' placeholder='Type your address here' />
-					<button id='wmx-address-geocode'>Find Location</button> <button id='wmx-address-add-marker'>+ Add Marker</button>
+					<button id='wmx-address-geocode'>Find</button> <button id='wmx-address-add-marker'>+ Add Marker</button>
 				</div>
 				<div id='wmx-map'>This will be a map.</div>
 				<div id='wmx-map-console'>

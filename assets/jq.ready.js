@@ -19,8 +19,6 @@
 */
 
 
-var wmx = wmx || {};
-wmx.pin = wmx.pin || null;
 
 jQuery(document).ready(function(){ 
  
@@ -54,7 +52,9 @@ jQuery(document).ready(function(){
 	
 		wmx.map.setCenter(wmx.position);
 		wmx.addMarker(wmx.position);
-		wmx.pin.setMap(null);
+		
+		if(wmx.pin instanceof google.maps.Marker)
+			wmx.pin.setMap(null);
 	
 	});
 	
@@ -78,7 +78,9 @@ jQuery(document).ready(function(){
 		
 			wmx.map.setCenter(wmx.position);
 			wmx.addMarker(wmx.position);
-			wmx.pin.setMap(null);
+			
+			if(wmx.pin instanceof google.maps.Marker)
+				wmx.pin.setMap(null);
 		
 		}
 		else 
@@ -88,7 +90,9 @@ jQuery(document).ready(function(){
 			
 				wmx.map.setCenter(wmx.position);
 				wmx.addMarker(wmx.position);
-				wmx.pin.setMap(null);
+				
+				if(wmx.pin instanceof google.maps.Marker)
+					wmx.pin.setMap(null);
 			
 			});
 			
@@ -129,7 +133,7 @@ jQuery(document).ready(function(){
 	
 		jQuery("#wmx-dialog").dialog({
 			modal: true, 
-			resizeable: false,
+			resizable: false,
 			width: 'auto',
 			height: 'auto',
 			open: function(e, ui) {
@@ -170,88 +174,4 @@ jQuery(document).ready(function(){
 });
 
 
-wmx.addMarker = function(position) {
-
-	var marker = new google.maps.Marker({
-	    position: position, 
-	    map: wmx.map,
-	    icon: wmx.mapImages.icon,
-	    draggable:true
-	});
-	
-	
-	google.maps.event.addListener(
-	    marker,
-	    'drag',
-	    function() {
-	    	marker.setIcon(wmx.mapImages.selected);
-	    }
-	);
-	
-	google.maps.event.addListener(
-	    marker,
-	    'dragend',
-	    function() {
-	    	marker.setIcon(wmx.mapImages.icon);
-	        document.getElementById('latlongclicked').value = marker.position;
-	    }
-	);
-	
-	google.maps.event.addListener(
-	    marker,
-	    'dblclick',
-	    function() {
-	        marker.setMap(null);
-	    }
-	);
-	
-}
-
-
-wmx.getGeocode = function(address, callback) {
-	
-   	var geocoder = new google.maps.Geocoder();
-   	var callback = callback;
-   	
-   	geocoder.geocode({'address': address}, function(results, status) {
-   		
-   		if(status == google.maps.GeocoderStatus.OK) {
-   		
-   			wmx.position = results[0].geometry.location;
-
-   			callback();
-   			
-   		} else {
-   		
-   			console.log("Geocoding was not successful for the following reasons: " + status);
-   			
-   			if(status == "OVER_QUERY_LIMIT")
-   			{
-   				alert("Error: You have somehow reached the limit for geocoding addresses into coordinates. Wait a few seconds and try again.");
-   				
-   			}
-   				
-   			if(status == "ZERO_RESULTS")
-   			{
-   				alert("Error: No results for the address: "+address);
-   			}
-   		
-   		}
-   			
-   	});
-}
- 
- 
-wmx.mapCenter = function() {
-
-	wmx.map.setCenter(wmx.position);
-	
-	wmx.pin = new google.maps.Marker({
-	    position: wmx.position, 
-	    map: wmx.map,
-	    icon: wmx.mapImages.pin,
-	    draggable:false
-	});
-
-}
 
