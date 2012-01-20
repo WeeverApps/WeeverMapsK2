@@ -21,6 +21,15 @@
 
 jQuery(document).ready(function(){ 
 	  
+	jQuery('#wmx-select-marker').click(function(event){
+					event.preventDefault();
+					SqueezeBox.initialize();
+					SqueezeBox.fromElement(this, {
+						handler: 'iframe',
+						url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-marker-url',
+						size: {x: 800, y: 434}
+					});
+				});
 
 	jQuery("<button class='wmx-latlong'>GeoTag</button>").insertAfter("#featured1-lbl");
 	
@@ -66,14 +75,14 @@ jQuery(document).ready(function(){
 				
 				google.maps.event.addListener(map, 'mousemove', function(event) {
 				
-					document.getElementById('latspan').innerHTML = event.latLng.lat();
-					document.getElementById('longspan').innerHTML = event.latLng.lng();
+					document.getElementById('wmx-lat-hover').value = event.latLng.lat();
+					document.getElementById('wmx-long-hover').value = event.latLng.lng();
 				
 				}); 
 				
 				google.maps.event.addListener(map, 'click', function(event) {
 
-					document.getElementById('latlongclicked').value = event.latLng;
+					//document.getElementById('latlongclicked').value = event.latLng;
 
 					var marker = new google.maps.Marker({
 					    position: event.latLng, 
@@ -128,5 +137,4 @@ jQuery(document).ready(function(){
 	
 	
 });
-
 

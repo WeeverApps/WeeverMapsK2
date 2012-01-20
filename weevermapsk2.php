@@ -40,7 +40,30 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		$document->addStyleSheet('/media/plg_weevermapsk2/weevermapsk2.css', 'text/css', null, array());
 		$document->addStyleSheet('/media/plg_weevermapsk2/jquery.ui.css', 'text/css', null, array());
 		
-		echo "<div id='wmx-dialog' title='Weever Maps | Click a spot to add a marker:'><div id='wmx-map'>This will be a map.</div><div id='latspan'></div><div id='longspan'></div><input type='text' id='latlongclicked' /></div>";
+		echo "<div id='wmx-dialog' title='Weever Maps Geotagger | Type an address or click a location to add a marker:'>
+				<div id='wmx-address'>
+					<input type='text' id='wmx-address-input' placeholder='Type your address here' />
+					<button id='wmx-address-geocode'>Add Marker</button>
+				</div>
+				<div id='wmx-map'>This will be a map.</div>
+				<div id='wmx-right-marker'>				
+					<img src='http://weeverapp.com/media/sprites/default-marker.png' /><br />
+				</div>
+				<div id='wmx-right-marker-buttons'>
+					<input type='text' placeholder='URL to Marker' id='wmx-marker-url' /><br />
+					<button id='wmx-select-marker'>Select Marker from Media Manger</button><br />
+				</div>
+				<div id='wmx-latlong-container'>
+					<div id='wmx-latitude'>
+						<div id='wmx-lat-hover-label'><label for='wmx-lat-hover'>Latitude:</label></div>
+						<input type='text' id='wmx-lat-hover' />
+					</div>
+					<div id='wmx-longitude'>
+						<div id='wmx-long-hover-label'><label for='wmx-long-hover'>Longitude:</label></div>
+						<input type='text' id='wmx-long-hover' />
+					</div>
+				</div>
+			</div>";
 		
 	
 		parent::__construct($subject, $params);

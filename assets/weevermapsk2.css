@@ -25,12 +25,40 @@ button.wmx-latlong {
 }
 
 #wmx-map {
-	width: 590px;
+	width: 640px;
 	height: 330px;
+}
+
+#wmx-right-marker {
+	float: right;
+}
+
+#wmx-right-marker-buttons {
+	float: right;
 }
 
 #wmx-dialog {
 	display: none;
 	background-color: #fff;
 	border: 1px solid #555;
+}
+
+#wmx-latlong-container {
+	margin-top: 0.325em;
+}
+
+#wmx-long-hover-label, #wmx-lat-hover-label {
+	width: 75px;
+	float: left;
+}
+
+#wmx-address {
+	margin-bottom: 0.625em;
+}
+
+#wmx-address-input {
+	font-size: 1.125em;
+	width: 480px;
+	margin: 0.325em;
+	margin-bottom: 0;
 }
