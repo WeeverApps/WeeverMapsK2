@@ -13,9 +13,20 @@
 		<filename plugin="weevermapsk2">weevermapsk2.php</filename>
 	</files>
 	
-	<params group="item-content">
-		<param name="latitude_item" type="text" size="20" default="" label="Latitude" description="The latitude of the GPS coordinates." />
-		<param name="longitude_item" type="text" size="20" default="" label="Longitude" description="The longitude of the GPS coordinates." />
+	<params group="item-other">
+		<param name="latitude_item" type="text" size="20" default="" label="WEEVER_MAPSK2_LATITUDE" description="The latitude of the GPS coordinates." />
+		<param name="longitude_item" type="text" size="20" default="" label="WEEVER_MAPSK2_LONGITUDE" description="The longitude of the GPS coordinates." />
 	</params>
+	
+	<languages>
+		<language tag="en-GB">en-GB.plg_k2_weevermapsk2.ini</language>
+	</languages>
+	
+	<media destination="plg_weevermapsk2" folder="assets">
+		<filename>weevermapsk2.js</filename>
+		<filename>weevermapsk2.css</filename>
+		<filename>jquery.ui.css</filename>
+		<folder>images</folder>
+	</media>
 
 </install>

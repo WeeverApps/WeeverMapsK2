@@ -29,12 +29,26 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 	public 	$pluginName = 'weevermapsk2';
 	public 	$pluginNameHumanReadable = 'Weever Maps for K2';
 
-	function __construct(&$subject, $params) 
+	public function __construct(&$subject, $params) 
 	{
-		parent::__construct($subject, $params);
-	}
+		
+		JPlugin::loadLanguage('plg_k2_'.$this->pluginName, JPATH_ADMINISTRATOR);
+		$document = &JFactory::getDocument();
+		$document->addScript( 'http://maps.googleapis.com/maps/api/js?sensor=false' );
+		$document->addScript( '/media/plg_weevermapsk2/weevermapsk2.js' );
+
+		$document->addStyleSheet('/media/plg_weevermapsk2/weevermapsk2.css', 'text/css', null, array());
+		$document->addStyleSheet('/media/plg_weevermapsk2/jquery.ui.css', 'text/css', null, array());
+		
+		echo "<div id='wmx-dialog' title='Weever Maps | Click a spot to add a marker:'><div id='wmx-map'>This will be a map.</div><div id='latspan'></div><div id='longspan'></div><input type='text' id='latlongclicked' /></div>";
+		
 	
-	function onAfterK2Save(&$item, $isNew) {
+		parent::__construct($subject, $params);
+		
+	}
+
+	
+	public function onAfterK2Save(&$item, $isNew) {
 	
 		$mainframe = &JFactory::getApplication();
 		
@@ -69,5 +83,5 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 	}
 
 	
-} // END CLASS
+} 
 
