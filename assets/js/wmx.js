@@ -22,13 +22,12 @@ var wmx = wmx || {};
 
 wmx.addMarker = function(position) {
 
-	var marker = new google.maps.Marker({
-	    position: position, 
-	    map: wmx.map,
-	    icon: wmx.mapImages.icon,
-	    draggable:true
-	});
-	
+	var marker = new MarkerWithLabel({
+	       position: position,
+	       draggable: true,
+	       map: wmx.map,
+	       icon: wmx.mapImages.icon
+	     });
 	
 	google.maps.event.addListener(
 	    marker,
@@ -43,7 +42,8 @@ wmx.addMarker = function(position) {
 	    'dragend',
 	    function() {
 	    	marker.setIcon(wmx.mapImages.icon);
-	        document.getElementById('latlongclicked').value = marker.position;
+	        jQuery('#wmx-long-hover').val( position.lng() );
+	        jQuery('#wmx-lat-hover').val( position.lat() );
 	    }
 	);
 	
@@ -51,7 +51,24 @@ wmx.addMarker = function(position) {
 	    marker,
 	    'dblclick',
 	    function() {
-	        marker.setMap(null);
+	        //marker.setMap(null);
+	        jQuery('#wmx-long-hover').val( position.lng() );
+	        jQuery('#wmx-lat-hover').val( position.lat() );
+	        
+	        wmx.selectedMarker = marker;
+	        
+	        jQuery('#wmx-marker-dialog').dialog({
+	        	modal: true, 
+	        	resizable: false,
+	        	width: 'auto',
+	        	height: 'auto',
+	        	open: function(e, ui) {
+	        	
+	        		jQuery('#wmx-marker-label-input').val( marker.get('labelContent') );
+	        	
+	        	}
+	        		        	
+	        });
 	    }
 	);
 	

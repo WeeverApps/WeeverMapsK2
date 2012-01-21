@@ -12,7 +12,6 @@
 	<files>
 		<filename plugin="weevermapsk2">weevermapsk2.php</filename>
 	</files>
-
 	
 	<params group="item-other">
 		<param name="latitude_item" type="text" size="20" default="" label="WEEVERMAPSK2_LATITUDE" description="WEEVERMAPSK2_LATITUDE_DESCRIPTION" />

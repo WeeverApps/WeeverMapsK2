@@ -127,6 +127,43 @@ jQuery(document).ready(function(){
 		              
 	}
 	
+	jQuery('#wmx-marker-label-input').keyup(function(e) {
+	
+		if( jQuery('#wmx-marker-label-input').val() == "" ) {
+		
+			wmx.selectedMarker.set('labelContent', "");
+			wmx.selectedMarker.set('labelStyle', {opacity: 0});
+		
+		} else {
+		
+			var hash = Math.floor((wmx.selectedMarker.position.lat() + wmx.selectedMarker.position.lng()) * 10000);
+			
+			wmx.selectedMarker.set('labelContent', jQuery('#wmx-marker-label-input').val());
+			wmx.selectedMarker.set('labelId', 'wmx-label-'+hash);
+			
+			var point = ((jQuery('#wmx-label-'+hash).width() + 10) / 2) - 1;
+			
+			wmx.selectedMarker.set('labelAnchor', new google.maps.Point(point, 0));
+			wmx.selectedMarker.set('labelClass', 'wmx-label');
+			wmx.selectedMarker.set('labelStyle', {opacity: 0.75});
+		
+		}
+	
+	});
+	
+	jQuery('#wmx-marker-done').click(function(e) {
+	
+		jQuery('#wmx-marker-dialog').dialog('close');
+	
+	});
+	
+	jQuery('#wmx-marker-delete').click(function(e) {
+	
+		wmx.selectedMarker.setMap(null);
+		jQuery('#wmx-marker-dialog').dialog('close');
+	
+	});
+	
 	jQuery('.wmx-latlong').click(function(e) {
 	
 		e.preventDefault();

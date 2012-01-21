@@ -36,6 +36,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		JPlugin::loadLanguage('plg_k2_'.$this->pluginName, JPATH_ADMINISTRATOR);
 		$document = &JFactory::getDocument();
 		$document->addScript( 'http://maps.googleapis.com/maps/api/js?sensor=false' );
+		$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'markerwithlabel.js' );
 		$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.js' );
 		$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'jq.ready.js' );
 
@@ -50,7 +51,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 				<div id='wmx-map'>This will be a map.</div>
 				<div id='wmx-map-console'>
 					<div id='wmx-latlong-container'>
-						<div id='wmx-latlong-title'>GPS Position</div>
+						<div id='wmx-latlong-title' class='wmx-title'>GPS Position</div>
 						<div id='wmx-latitude'>
 							<div class='wmx-hover-label'><label for='wmx-lat-hover'>Latitude:</label></div>
 							<input type='text' id='wmx-lat-hover' />
@@ -79,11 +80,22 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 						click on a location in the map, or<br />
 						type in an address (above), or<br />
 						type in the latitude and longitude and click &quot;+ Add Marker&quot;.<br />
-						<b>Double-click a marker to delete it.</b></p>
+						<b>Double-click a marker to edit it.</b></p>
 						<button>Add KML File</button> 
 					</div>
 				</div>
 				
+			</div>
+			<div id='wmx-marker-dialog' title='Edit Marker'>
+				
+				<div id='wmx-marker-dialog-options-container'>
+					<div class='wmx-title'>Options</div>
+					<input id='wmx-marker-label-input' type='text' class='wmx-marker-button'  placeholder='Label' /><br />
+					<input type='button' id='wmx-marker-change-icon' class='wmx-marker-button' value='Change image...' /><br />
+					<input type='button' id='wmx-marker-delete' class='wmx-marker-button' value='Delete Marker' />
+					
+					<input type='button' id='wmx-marker-done' class='wmx-marker-button' value='Done' />
+				</div>
 			</div>";
 		
 	
