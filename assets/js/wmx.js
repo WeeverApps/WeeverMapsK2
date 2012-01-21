@@ -62,6 +62,11 @@ wmx.addMarker = function(position) {
 	        	resizable: false,
 	        	width: 'auto',
 	        	height: 'auto',
+	        	buttons: {
+	        		Done: function() {
+	        			jQuery(this).dialog( "close" );
+	        		}			
+	        	},
 	        	open: function(e, ui) {
 	        	
 	        		jQuery('#wmx-marker-label-input').val( marker.get('labelContent') );

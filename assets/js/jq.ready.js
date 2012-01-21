@@ -43,6 +43,17 @@ jQuery(document).ready(function(){
 			size: {x: 800, y: 434}
 		});
 	});
+	
+	
+	jQuery('#wmx-kml-media').click(function(event){
+		event.preventDefault();
+		SqueezeBox.initialize();
+		SqueezeBox.fromElement(this, {
+			handler: 'iframe',
+			url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-kml-url',
+			size: {x: 800, y: 434}
+		});
+	});
 
 				
 	jQuery('#wmx-address-geocode').click(function(event){
@@ -193,12 +204,6 @@ jQuery(document).ready(function(){
 	
 	});
 	
-	jQuery('#wmx-marker-done').click(function(e) {
-	
-		jQuery('#wmx-marker-dialog').dialog('close');
-	
-	});
-	
 	jQuery('#wmx-marker-delete').click(function(e) {
 	
 		wmx.selectedMarker.setMap(null);
@@ -206,45 +211,118 @@ jQuery(document).ready(function(){
 	
 	});
 	
+	jQuery('#wmx-add-kml').click(function(e) {
+	
+		jQuery('#wmx-kml-dialog').dialog({
+		
+			resizable: false,
+			height:140,
+			modal: true,
+			buttons: {
+				Done: function() {
+					jQuery( this ).dialog( "close" );
+				}
+			}
+		
+		});
+	
+	});
+	
+	jQuery('#wmx-gps-location').click(function(e) {
+	
+		var success = function(position) {
+		
+			wmx.position = new google.maps.LatLng( 
+				position.coords.latitude, 
+				position.coords.longitude 
+			);
+			  
+			wmx.mapCenter();
+		
+		}
+		
+		var error = function(msg) {
+		
+			alert('Error: ' + msg);
+		
+		}
+	
+		if (navigator.geolocation)		
+			navigator.geolocation.getCurrentPosition(success, error);
+		else
+			alert('geolocation not supported');
+
+		
+	
+	});
+	
 	jQuery('.wmx-latlong').click(function(e) {
 	
 		e.preventDefault();
+		
+		var savePrompt = function(e, ui) {
+		
+			jQuery("#wmx-close-dialog").dialog({
+				resizable: false,
+				height:140,
+				modal: true,
+				buttons: {
+					"Abandon Changes": function() {
+						jQuery( this ).dialog( "close" );
+						return true;
+					},
+					Cancel: function() {
+						jQuery( this ).dialog( "close" );
+						return false;
+					}
+				}
+			});
+		
+		}
+		
+		var loadDialog = function(e, ui) {
+			
+			var myOptions = {
+			          center: new google.maps.LatLng(-34.397, 150.644),
+			          zoom: 8,
+			          mapTypeId: google.maps.MapTypeId.ROADMAP
+			        };
+			
+			wmx.map = new google.maps.Map(document.getElementById("wmx-map"),
+			            myOptions);
+			
+			google.maps.event.addListener(wmx.map, 'mousemove', function(event) {
+			
+				document.getElementById('wmx-lat-hover').value = event.latLng.lat();
+				document.getElementById('wmx-long-hover').value = event.latLng.lng();
+			
+			}); 
+			
+			google.maps.event.addListener(wmx.map, 'click', function(event) {
+			
+				wmx.addMarker(event.latLng);
+				
+			}); 
+			
+		}
+		
 	
 		jQuery("#wmx-dialog").dialog({
 			modal: true, 
 			resizable: false,
 			width: 'auto',
 			height: 'auto',
-			open: function(e, ui) {
-			
-			//	 = jQuery('#wmx-map').data('gmap');
-			
-				
-				var myOptions = {
-				          center: new google.maps.LatLng(-34.397, 150.644),
-				          zoom: 8,
-				          mapTypeId: google.maps.MapTypeId.ROADMAP
-				        };
-				
-				wmx.map = new google.maps.Map(document.getElementById("wmx-map"),
-				            myOptions);
-				
-				google.maps.event.addListener(wmx.map, 'mousemove', function(event) {
-				
-					document.getElementById('wmx-lat-hover').value = event.latLng.lat();
-					document.getElementById('wmx-long-hover').value = event.latLng.lng();
-				
-				}); 
-				
-				google.maps.event.addListener(wmx.map, 'click', function(event) {
-				
-					wmx.addMarker(event.latLng);
-					
-				}); 
-				
-			
-			}
-			}); 
+			buttons: {
+				Cancel: function() {
+					jQuery(this).dialog( "close" );
+				},
+				"Save Changes": function() {
+					jQuery(this).dialog( "close" );
+				},			
+			},
+			open: loadDialog(),
+			beforeClose: savePrompt()
+		}); 
 	
 	
 	});

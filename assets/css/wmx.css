@@ -19,19 +19,11 @@
 */
 
 
-#wmx-dialog {
+#wmx-dialog, #wmx-marker-dialog, #wmx-close-dialog, #wmx-kml-dialog {
 	display: none;
 	background-color: #fff;
-	border: 1px solid #555;
+	border: 1px solid #999;
 }
-
-#wmx-marker-dialog {
-	display: none;
-	background-color: #fff;
-	border: 1px solid #555;
-}
-
-
 
 #wmx-marker-label-input {
 	width: 5em;
@@ -73,7 +65,8 @@ button.wmx-latlong {
 
 #wmx-map {
 	width: 670px;
-	height: 330px;
+	height: 285px;
+	border: 1px solid #999;
 }
 
 #wmx-marker-image {
@@ -89,15 +82,24 @@ button.wmx-latlong {
 
 }
 
-#wmx-marker-container {
+.wmx-console-container-widget {
 	margin: 0.5em;
-	margin-top: 0.325em;
+	margin-top: 0.25em;
+	margin-bottom: 0;
 	font-size: 1.125em;
-	border: 1px solid #ccc;
 	padding: 0.5em;
 	float: left;
-	height: 115px;
-	background-color: #f3f3f3;
+	height: 105px;
+	background-color: #f3f3f3;	
+	border: 1px solid #d3d3d3;
+}
+
+#wmx-console-options {
+	text-align:center;
+}
+
+#wmx-marker-container {
+
 }
 
 #wmx-select-marker {
@@ -125,14 +127,11 @@ button.wmx-latlong {
 }
 
 #wmx-latlong-container {
-	margin-top: 0.325em;
-	font-size: 1.125em;
-	border: 1px solid #ccc;
-	padding: 0.5em;
-	float: left;
-	height: 115px;
-	text-align:center;
-	background-color: #f3f3f3;
+
+}
+
+#wmx-options-container {
+	max-width: 185px;
 }
 
 .wmx-hover-label {
@@ -141,7 +140,7 @@ button.wmx-latlong {
 }
 
 #wmx-address {
-	margin-bottom: 0.625em;
+	margin-bottom: 0.35em;
 }
 
 #wmx-address-input {
@@ -149,6 +148,7 @@ button.wmx-latlong {
 	width: 480px;
 	margin: 0.325em;
 	margin-bottom: 0;
+	margin-left: 0;
 }
 
 .wmx-latlong-button {
@@ -158,10 +158,11 @@ button.wmx-latlong {
 
 #wmx-instructions {
 	font-size: 0.925em;
-	padding: 0.25em;
+	padding: 0.125em;
 }
 
 #wmx-map-console {
+	text-align:center;
 	max-width: 670px;
-	padding-top: 0.5em;
+	padding-top: 0.25em;
 }
