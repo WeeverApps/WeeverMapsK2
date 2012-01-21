@@ -1,8 +1,8 @@
 /**
- * @name MarkerWithLabel for V3
- * @version 1.0.1 [September 17, 2010]
- * @author Gary Little (inspired by code from Marc Ridey of Google).
- * @copyright Copyright 2010 Gary Little [gary at luxcentral.com]
+ * @name MarkerWithLabel for Google Maps API V3
+ * @version 1.1 [January 21, 2012]
+ * @author Robert Gerald Porter (1.1 changes), Gary Little (original code) .
+ * @copyright Copyright 2010 Gary Little [gary at luxcentral.com] (inspired by code from Marc Ridey of Google)
  * @fileoverview MarkerWithLabel extends the Google Maps JavaScript API V3
  *  <code>google.maps.Marker</code> class.
  *  <p>
@@ -364,6 +364,8 @@ MarkerLabel_.prototype.setVisible = function () {
  *  Note that style values for <code>position</code>, <code>overflow</code>, <code>top</code>,
  *  <code>left</code>, <code>zIndex</code>, <code>display</code>, <code>marginLeft</code>, and
  *  <code>marginTop</code> are ignored; these styles are for internal use only.
+ * @property {string} [labelId] The name of the label ID in the DOM. Can be used to select specific
+ *  label instances.
  * @property {Object} [labelStyle] An object literal whose properties define specific CSS
  *  style values to be applied to the label. Style values defined here override those that may
  *  be defined in the <code>labelClass</code> style sheet. If this property is changed after the
@@ -390,7 +392,7 @@ function MarkerWithLabel(opt_options) {
   opt_options.labelContent = opt_options.labelContent || "";
   opt_options.labelAnchor = opt_options.labelAnchor || new google.maps.Point(0, 0);
   opt_options.labelClass = opt_options.labelClass || "markerLabels";
-  opt_options.labelId = opt_options.labelId || "";
+  opt_options.labelId = opt_options.labelId || ""; // ### Add [labelId] property
   opt_options.labelStyle = opt_options.labelStyle || {};
   opt_options.labelInBackground = opt_options.labelInBackground || false;
   if (typeof opt_options.labelVisible === "undefined") {
