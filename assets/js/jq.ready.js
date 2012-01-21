@@ -23,14 +23,27 @@
 jQuery(document).ready(function(){ 
  
 	jQuery('#wmx-select-marker').click(function(event){
-					event.preventDefault();
-					SqueezeBox.initialize();
-					SqueezeBox.fromElement(this, {
-						handler: 'iframe',
-						url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-marker-url',
-						size: {x: 800, y: 434}
-					});
-				});
+		event.preventDefault();
+		SqueezeBox.initialize();
+		SqueezeBox.fromElement(this, {
+			handler: 'iframe',
+			url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-marker-url',
+			size: {x: 800, y: 434}
+		});
+	});
+	
+	
+
+	jQuery('#wmx-marker-change-icon').click(function(event){
+		event.preventDefault();
+		SqueezeBox.initialize();
+		SqueezeBox.fromElement(this, {
+			handler: 'iframe',
+			url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-marker-icon',
+			size: {x: 800, y: 434}
+		});
+	});
+
 				
 	jQuery('#wmx-address-geocode').click(function(event){
 	
@@ -41,6 +54,35 @@ jQuery(document).ready(function(){
 		
 		});
 	
+	});
+	
+	jQuery('#wmx-address-input').click(function() {
+	
+		if(this.value == this.defaultValue)
+	    {
+			this.select();
+		}
+	
+	});
+	
+	jQuery('#wmx-address-input').focus(function() {
+	
+		if(this.value == this.defaultValue)
+	    {
+			this.select();
+		}
+	
+	});
+	
+	jQuery("input#wmx-address-input").bind("keypress", function (e) {
+	
+	    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+	        jQuery('button#wmx-address-geocode').click();
+	        return false;
+	    } else {
+	        return true;
+	    }
+	    
 	});
 	
 	jQuery('#wmx-latlong-add-marker').click(function(event){
@@ -206,6 +248,7 @@ jQuery(document).ready(function(){
 	
 	
 	});
+		
 	
 	
 });

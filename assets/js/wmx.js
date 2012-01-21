@@ -124,3 +124,80 @@ wmx.mapCenter = function() {
 	});
 
 }
+
+
+wmx.setMarkerIconDefault = function(el) {
+
+	var image = el.value;
+	
+	wmx.mapImages.icon = new google.maps.MarkerImage(
+	                image,
+	                new google.maps.Size(32, 37),
+	                new google.maps.Point(0,0),
+	                new google.maps.Point(16, 37),
+	                new google.maps.Size(64, 37)
+	              );
+	              
+	jQuery('#wmx-marker-image').attr('src', image); 
+
+}
+
+
+wmx.setMarkerIcon = function(el) {
+
+	wmx.selectedMarker.setIcon(	
+		new google.maps.MarkerImage(
+	        el.value,
+	        new google.maps.Size(32, 37),
+	        new google.maps.Point(0,0),
+	        new google.maps.Point(16, 37),
+	        new google.maps.Size(64, 37)
+	   )
+	);
+
+};
+
+
+// override the K2 media update function
+
+var _elFinderUpdate = elFinderUpdate;
+
+var elFinderUpdate = function(fieldID, value) {
+	
+	if(fieldID == 'wmx-marker-url') {
+	
+		var image = "/"+value;
+	
+		wmx.mapImages.icon = new google.maps.MarkerImage(
+		                image,
+		                new google.maps.Size(32, 37),
+		                new google.maps.Point(0,0),
+		                new google.maps.Point(16, 37),
+		                new google.maps.Size(64, 37)
+		              );
+		              
+		jQuery('#wmx-marker-image').attr('src', image); 
+		
+		_elFinderUpdate(fieldID, value);
+	
+	} else if (fieldID == 'wmx-marker-icon') {
+	
+		wmx.selectedMarker.setIcon(	
+			new google.maps.MarkerImage(
+		        "/"+value,
+		        new google.maps.Size(32, 37),
+		        new google.maps.Point(0,0),
+		        new google.maps.Point(16, 37),
+		        new google.maps.Size(64, 37)
+		   )
+		);
+		
+		_elFinderUpdate(fieldID, value);
+	
+	} else {
+	
+		_elFinderUpdate(fieldID, value);
+	
+	}
+
+};

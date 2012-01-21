@@ -45,11 +45,12 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		
 		echo "<div id='wmx-dialog' title='&lt;img id=&quot;wmx-logo&quot; src=&quot;/media/plg_weevermapsk2/images/weever.png&quot;&gt; ".$this->pluginNameHumanReadable." v".$this->pluginVersion."'>
 				<div id='wmx-address'>
-					<input type='text' id='wmx-address-input' placeholder='Type your address here' />
+					<input type='text' id='wmx-address-input' placeholder='Type your address here' value='Type in an address or click a location on the map' />
 					<button id='wmx-address-geocode'>Find</button> <button id='wmx-address-add-marker'>+ Add Marker</button>
 				</div>
 				<div id='wmx-map'>This will be a map.</div>
 				<div id='wmx-map-console'>
+					<div id='wmx-instructions'><span><b>Instructions:</b> Click a location to add a marker; double click a marker to edit its properties.</span></div>
 					<div id='wmx-latlong-container'>
 						<div id='wmx-latlong-title' class='wmx-title'>GPS Position</div>
 						<div id='wmx-latitude'>
@@ -71,31 +72,31 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 							<img src='http://weeverapp.com/media/sprites/default-marker.png' id='wmx-marker-image' /><br />
 						</div>
 						<div id='wmx-right-marker-buttons'>
-							<input type='hidden' id='wmx-marker-url' />
-							<button id='wmx-select-marker'>Choose Marker Image...</button><br />
+							<input type='hidden' name='wmx-marker-url' id='wmx-marker-url' value='' />
+							<button id='wmx-select-marker'>Choose Marker Icon...</button><br />
 						</div>
 					</div>
-					<div id='wmx-instructions'>
-						<p><b>To add a marker:</b><br />
-						click on a location in the map, or<br />
-						type in an address (above), or<br />
-						type in the latitude and longitude and click &quot;+ Add Marker&quot;.<br />
-						<b>Double-click a marker to edit it.</b></p>
+					<div id='wmx-save'>
+						<button>Save Changes and Close</button>
 						<button>Add KML File</button> 
 					</div>
 				</div>
 				
 			</div>
+			
 			<div id='wmx-marker-dialog' title='Edit Marker'>
 				
 				<div id='wmx-marker-dialog-options-container'>
 					<div class='wmx-title'>Options</div>
+					<label class='wmx-marker-button' for='wmx-marker-label-input'>Label: </label>
 					<input id='wmx-marker-label-input' type='text' class='wmx-marker-button'  placeholder='Label' /><br />
 					<input type='button' id='wmx-marker-change-icon' class='wmx-marker-button' value='Change image...' /><br />
+					<input type='hidden' id='wmx-marker-icon' name='wmx-marker-icon' value='' />
 					<input type='button' id='wmx-marker-delete' class='wmx-marker-button' value='Delete Marker' />
 					
 					<input type='button' id='wmx-marker-done' class='wmx-marker-button' value='Done' />
 				</div>
+				
 			</div>";
 		
 	
