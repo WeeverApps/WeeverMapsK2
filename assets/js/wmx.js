@@ -18,16 +18,51 @@
 *
 */
 
+Array.prototype.remove = function(){
+    var what, a = arguments, L = a.length, ax;
+    while(L && this.length){
+        what = a[--L];
+        while((ax= this.indexOf(what)) != -1){
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+}
+
+// for IE8 and below
+if(!Array.prototype.indexOf){
+    Array.prototype.indexOf = function(what, i){
+        i = i || 0;
+        var L = this.length;
+        while(i < L){
+            if(this[i] === what) return i;
+            ++i;
+        }
+        return -1;
+    }
+}
+
+
 var wmx = wmx || {};
 
 wmx.addMarker = function(position) {
+
+	wmx.markers = wmx.markers || [];
+	
+	var address = jQuery('#wmx-address-input').val();
+	
+	if( address == jQuery('#wmx-address-input')[0].defaultValue )
+		address = null;
 
 	var marker = new MarkerWithLabel({
 	       position: position,
 	       draggable: true,
 	       map: wmx.map,
-	       icon: wmx.mapImages.icon
+	       icon: wmx.mapImages.icon,
+	       address: address
 	     });
+	     
+	wmx.markers.push(marker);
 	
 	google.maps.event.addListener(
 	    marker,
@@ -51,7 +86,7 @@ wmx.addMarker = function(position) {
 	    marker,
 	    'dblclick',
 	    function() {
-	        //marker.setMap(null);
+
 	        jQuery('#wmx-long-hover').val( position.lng() );
 	        jQuery('#wmx-lat-hover').val( position.lat() );
 	        
@@ -77,6 +112,18 @@ wmx.addMarker = function(position) {
 	    }
 	);
 	
+}
+
+wmx.removeMarker = function(marker) {
+
+	for(i=0; i<wmx.markers.length; i++) {
+	
+		if(wmx.markers[i] == marker)
+			wmx.markers.remove(marker);
+	
+	}
+
+
 }
 
 
@@ -161,6 +208,45 @@ wmx.setMarkerIcon = function(el) {
 	);
 
 };
+
+wmx.saveSettings = function() {
+
+	wmx.safeClose = true;
+	
+	var latitude = '#pluginsweevermapsk2latitude_item',
+		longitude = '#pluginsweevermapsk2longitude_item',
+		address = '#pluginsweevermapsk2address_item',
+		label = '#pluginsweevermapsk2label_item',
+		markerId = '#pluginsweevermapsk2marker_item',
+		kml = '#pluginsweevermapsk2kml_item',
+		_dl = ";",
+		latVal = "", longVal = "", addVal = "", labelVal = "", markVal = "";
+
+	for( i=0; i<wmx.markers.length; i++ ) {
+	
+		marker = wmx.markers[i];
+		
+		latVal = latVal + marker.position.lat() + _dl;
+		longVal = longVal + marker.position.lng() + _dl;
+		
+		if(marker.address != null)
+			addVal = addVal + marker.address + _dl;
+		else   
+			addVal = addVal  + _dl;
+			
+		labelVal = labelVal + marker.labelContent + _dl;
+		markVal = markVal + marker.icon.url + _dl;
+	
+	}
+	
+	jQuery(latitude).val( latVal );
+	jQuery(longitude).val( longVal  );
+	jQuery(address).val( addVal );
+	jQuery(label).val( labelVal );
+	jQuery(markerId).val( markVal );
+	jQuery(kml).val( jQuery('#wmx-kml-url').val() );
+
+}
 
 
 // override the K2 media update function

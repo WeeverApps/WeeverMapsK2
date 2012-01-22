@@ -57,9 +57,12 @@
      white-space: nowrap;
    }
 
-button.wmx-latlong {
-	height: 2em;
-	width: 5em;
+button#wmx-geocoder-launch {
+	z-index: 100;
+	position: absolute;
+	left: 230px;
+	height: 3em;
+	width: 10em;
 	margin-left: 4em;
 }
 

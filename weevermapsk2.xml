@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install version="1.5" type="plugin" group="k2" method="upgrade">
-	<name>WEEVERMAPSK2_PLG_NAME</name>
-	<author>Robert Gerald Porter</author>
-	<creationDate>January 20, 2012</creationDate>
-	<copyright>Copyright (c) 2012 Weever Apps Inc. All rights reserved.</copyright>
-	<authorEmail>rob@weeverapps.com</authorEmail>
-	<authorUrl>http://weeverapps.com/</authorUrl>
-	<version>0.1</version>
-	<license>GPL v3</license>
-	<description>WEEVERMAPSK2_PLG_DESCRIPTION</description>
-	<files>
-		<filename plugin="weevermapsk2">weevermapsk2.php</filename>
-		<folder>weevermapsk2</folder>
-	</files>
+<install type="plugin" version="1.5.0" group="k2" method="upgrade">
+ <name>WEEVERMAPSK2_PLG_NAME</name>
+ <creationDate>2012-01-21</creationDate>
+ <author>Robert Gerald Porter</author>
+ <authorEmail>rob@weeverapps.com</authorEmail>
+ <authorUrl>http://www.weeverapps.com/</authorUrl>
+ <copyright>(c) 2012 Weever Apps Inc.</copyright>
+ <license>GPLv3</license>
+ <version>0.1</version>
+ <releaseType>Stable</releaseType>
+ <description>WEEVERMAPSK2_PLG_DESCRIPTION</description>
+ <files>
+	<filename plugin="weevermapsk2">weevermapsk2.php</filename>
+	<folder>weevermapsk2</folder>
+ </files>
 	
-	<params group="item-other">
-		<param name="latitude_item" type="text" size="20" default="" label="WEEVERMAPSK2_LATITUDE" description="WEEVERMAPSK2_LATITUDE_DESCRIPTION" />
-		<param name="longitude_item" type="text" size="20" default="" label="WEEVERMAPSK2_LONGITUDE" description="WEEVERMAPSK2_LONGITUDE_DESCRIPTION" />
-		<param name="altitude_item" type="text" size="20" default="" label="WEEVERMAPSK2_ALTITUDE" description="WEEVERMAPSK2_ALTITUDE_DESCRIPTION" />
-		<param name="address_item" type="text" size="20" default="" label="WEEVERMAPSK2_ADDRESS" description="WEEVERMAPSK2_ADDRESS_DESCRIPTION" />
-		<param name="label_item" type="text" size="20" default="" label="WEEVERMAPSK2_LABEL" description="WEEVERMAPSK2_LABEL_DESCRIPTION" />
-		<param name="marker_item" type="text" size="20" default="" label="WEEVERMAPSK2_MARKER" description="WEEVERMAPSK2_MARKER_DESCRIPTION" />
-		<param name="kml_item" type="text" size="20" default="" label="WEEVERMAPSK2_KML" description="WEEVERMAPSK2_KML_DESCRIPTION" />
-	</params>
-	
-	<languages folder="languages">
-		<language tag="en-GB">en-GB.plg_k2_weevermapsk2.ini</language>
-		<language tag="en-GB">en-GB.plg_k2_weevermapsk2.sys.ini</language>
-	</languages>
-	
-	<media destination="plg_weevermapsk2" folder="assets">
-		<folder>js</folder>
-		<folder>css</folder>
-		<folder>images</folder>
-		<filename>index.html</filename>
-	</media>
+ <params group="item-other">
+	<param name="latitude_item" type="text" size="20" default="" label="WEEVERMAPSK2_LATITUDE" description="WEEVERMAPSK2_LATITUDE_DESCRIPTION" />
+	<param name="longitude_item" type="text" size="20" default="" label="WEEVERMAPSK2_LONGITUDE" description="WEEVERMAPSK2_LONGITUDE_DESCRIPTION" />
+	<param name="altitude_item" type="text" size="20" default="" label="WEEVERMAPSK2_ALTITUDE" description="WEEVERMAPSK2_ALTITUDE_DESCRIPTION" />
+	<param name="address_item" type="text" size="20" default="" label="WEEVERMAPSK2_ADDRESS" description="WEEVERMAPSK2_ADDRESS_DESCRIPTION" />
+	<param name="label_item" type="text" size="20" default="" label="WEEVERMAPSK2_LABEL" description="WEEVERMAPSK2_LABEL_DESCRIPTION" />
+	<param name="marker_item" type="text" size="20" default="" label="WEEVERMAPSK2_MARKER" description="WEEVERMAPSK2_MARKER_DESCRIPTION" />
+	<param name="kml_item" type="text" size="20" default="" label="WEEVERMAPSK2_KML" description="WEEVERMAPSK2_KML_DESCRIPTION" />
+ </params>
+
+ <languages folder="languages">
+	<language tag="en-GB">en-GB.plg_k2_weevermapsk2.ini</language>
+	<language tag="en-GB">en-GB.plg_k2_weevermapsk2.sys.ini</language>
+ </languages>
+
+ <media destination="plg_weevermapsk2" folder="assets">
+	<folder>js</folder>
+	<folder>css</folder>
+	<folder>images</folder>
+	<filename>index.html</filename>
+ </media>
 
 </install>

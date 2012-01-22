@@ -171,23 +171,58 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 
 	
 	public function onAfterK2Save(&$item, $isNew) {
-	
-		$mainframe = &JFactory::getApplication();
 		
 		$geoData = json_decode($item->plugins);
 		
-
-		//, longitude, altitude, address, kml, marker
-			$query = " 	INSERT  ".
-					"	INTO	#__weever_maps ".
-					"	(component_id, component, location) ".
-					"	VALUES ('".$item->id."', 'com_k2', GeomFromText(' POINT(".$geoData->weevermapsk2latitude_item." ".$geoData->weevermapsk2longitude_item.") '))";
-
+		$geoLatArray = explode(";", $geoData->weevermapsk2latitude_item);
+		$geoLongArray = explode(";", $geoData->weevermapsk2longitude_item);
+		$geoAddressArray = explode(";", $geoData->weevermapsk2address_item);
+		$geoLabelArray = explode(";", $geoData->weevermapsk2label_item);
+		$geoMarkerArray = explode(";", $geoData->weevermapsk2marker_item);
+		
 		$db = &JFactory::getDBO();
 		
+		$query = " DELETE FROM #__weever_maps 
+					WHERE
+						component_id = ".$db->Quote($item->id)."
+						AND
+						component = ".$db->Quote('com_k2');
+						
+	
 		$db->setQuery($query);
-		
 		$result = $db->loadObject();
+		
+		foreach( (array) $geoLatArray as $k=>$v )
+		{
+		
+			$query = " 	INSERT  ".
+					"	INTO	#__weever_maps ".
+					"	(component_id, component, location, address, label, marker) ".
+					"	VALUES ('".$item->id."', ".$db->Quote('com_k2').", 
+							GeomFromText(' POINT(".$geoLatArray[$k]." ".$geoLongArray[$k].") '),
+							".$db->Quote($geoAddressArray[$k]).", 
+							".$db->Quote($geoLabelArray[$k]).", 
+							".$db->Quote($geoMarkerArray[$k]).")";
+						
+		
+			$db->setQuery($query);
+			$result = $db->loadObject();
+		
+		}
+		
+		if($geoData->weevermapsk2kml_item)
+		{
+			
+			$query = " 	INSERT  ".
+					"	INTO	#__weever_maps ".
+					"	(component_id, component, kml) ".
+					"	VALUES ('".$item->id."', 'com_k2', ".$db->Quote($geoData->weevermapsk2kml_item).")";
+			
+			$db->setQuery($query);
+			$result = $db->loadObject();
+		
+		}
+		
 		
 		
 		/*

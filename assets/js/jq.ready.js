@@ -154,7 +154,7 @@ jQuery(document).ready(function(){
 	});
 
 
-	jQuery("<button class='wmx-latlong'>GeoTag</button>").insertAfter("#featured1-lbl");
+	jQuery("<button id='wmx-geocoder-launch'>GeoTag</button>").insertAfter("#featured1");
 	
 	wmx.mapImages = {
 		icon: new google.maps.MarkerImage(
@@ -207,6 +207,7 @@ jQuery(document).ready(function(){
 	jQuery('#wmx-marker-delete').click(function(e) {
 	
 		wmx.selectedMarker.setMap(null);
+		wmx.removeMarker(wmx.selectedMarker);
 		jQuery('#wmx-marker-dialog').dialog('close');
 	
 	});
@@ -267,7 +268,7 @@ jQuery(document).ready(function(){
 	
 	});
 	
-	jQuery('.wmx-latlong').click(function(e) {
+	jQuery('#wmx-geocoder-launch').click(function(e) {
 	
 		e.preventDefault();
 		
@@ -316,13 +317,16 @@ jQuery(document).ready(function(){
 					jQuery(this).dialog( "close" );
 				},
 				"Save Changes": function() {
+					wmx.saveSettings();
 					jQuery(this).dialog( "close" );
+					wmx.safeClose = false;
 				},			
 			},
 			open: loadDialog(),
 			beforeClose: function() {
 			
-				return confirm(Joomla.JText._('WEEVERMAPSK2_CONFIRM_CLOSE'));
+				if(wmx.safeClose == undefined || wmx.safeClose == false)
+					return confirm(Joomla.JText._('WEEVERMAPSK2_CONFIRM_CLOSE'));
 			
 			}
 		}); 
