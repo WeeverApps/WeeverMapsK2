@@ -44,7 +44,7 @@ jQuery(document).ready(function(){
 		});
 	});
 	
-	
+	/*
 	jQuery('#wmx-kml-media').click(function(event){
 		event.preventDefault();
 		SqueezeBox.initialize();
@@ -53,7 +53,7 @@ jQuery(document).ready(function(){
 			url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-kml-url',
 			size: {x: 800, y: 434}
 		});
-	});
+	});*/
 
 				
 	jQuery('#wmx-address-geocode').click(function(event){
@@ -219,7 +219,18 @@ jQuery(document).ready(function(){
 			height:140,
 			modal: true,
 			buttons: {
-				Done: function() {
+				"Load KML File": function() {
+					
+					if(wmx.KmlLayer instanceof google.maps.KmlLayer)
+						wmx.KmlLayer.setMap(null);
+						
+					wmx.KmlLayer = new google.maps.KmlLayer( jQuery('#wmx-kml-url').val() )
+					wmx.KmlLayer.setMap(wmx.map);
+					
+					jQuery( this ).dialog( "close" );
+					
+				},
+				Cancel: function() {
 					jQuery( this ).dialog( "close" );
 				}
 			}
@@ -260,36 +271,24 @@ jQuery(document).ready(function(){
 	
 		e.preventDefault();
 		
-		var savePrompt = function(e, ui) {
-		
-			jQuery("#wmx-close-dialog").dialog({
-				resizable: false,
-				height:140,
-				modal: true,
-				buttons: {
-					"Abandon Changes": function() {
-						jQuery( this ).dialog( "close" );
-						return true;
-					},
-					Cancel: function() {
-						jQuery( this ).dialog( "close" );
-						return false;
-					}
-				}
-			});
-		
-		}
-		
-		var loadDialog = function(e, ui) {
+		var loadDialog = function() {
 			
 			var myOptions = {
 			          center: new google.maps.LatLng(-34.397, 150.644),
 			          zoom: 8,
 			          mapTypeId: google.maps.MapTypeId.ROADMAP
 			        };
+			        
+			if(wmx.map instanceof google.maps.Map)
+			{
 			
-			wmx.map = new google.maps.Map(document.getElementById("wmx-map"),
-			            myOptions);
+				setTimeout(function() {
+					google.maps.event.trigger(wmx.map, 'resize');
+				}, 350);
+				
+			}
+			else 
+				wmx.map = new google.maps.Map(document.getElementById("wmx-map"), myOptions);
 			
 			google.maps.event.addListener(wmx.map, 'mousemove', function(event) {
 			
@@ -321,7 +320,11 @@ jQuery(document).ready(function(){
 				},			
 			},
 			open: loadDialog(),
-			beforeClose: savePrompt()
+			beforeClose: function() {
+			
+				return confirm(Joomla.JText._('WEEVERMAPSK2_CONFIRM_CLOSE'));
+			
+			}
 		}); 
 	
 	

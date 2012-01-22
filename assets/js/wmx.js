@@ -105,7 +105,7 @@ wmx.getGeocode = function(address, callback) {
    				
    			if(status == "ZERO_RESULTS")
    			{
-   				alert("Error: No results for the address: "+address);
+   				alert(Joomla.JText._('WEEVERMAPSK2_ERROR_NO_RESULTS')+address);
    			}
    		
    		}
