@@ -45,12 +45,13 @@ if(!Array.prototype.indexOf){
 
 var wmx = wmx || {};
 
-wmx.addMarker = function(position) {
+wmx.addMarker = function(position, address, labelContent, icon) {
 
 	wmx.markers = wmx.markers || [];
 	
-	var address = jQuery('#wmx-address-input').val();
-	
+	var address = address || jQuery('#wmx-address-input').val(),
+		icon 	= icon || wmx.mapImages.icon;
+		
 	if( address == jQuery('#wmx-address-input')[0].defaultValue )
 		address = null;
 
@@ -58,9 +59,12 @@ wmx.addMarker = function(position) {
 	       position: position,
 	       draggable: true,
 	       map: wmx.map,
-	       icon: wmx.mapImages.icon,
+	       icon: icon,
 	       address: address
 	     });
+	     
+	if(labelContent) 
+		wmx.addLabel(marker, labelContent);
 	     
 	wmx.markers.push(marker);
 	
@@ -126,6 +130,22 @@ wmx.removeMarker = function(marker) {
 
 }
 
+wmx.addLabel = function(marker, labelContent) {
+
+	var marker 			= marker || wmx.selectedMarker,
+		labelContent 	= labelContent || jQuery('#wmx-marker-label-input').val(),
+		hash 			= Math.floor((marker.position.lat() + marker.position.lng()) * 10000);
+	
+	marker.set('labelContent', labelContent );
+	marker.set('labelId', 'wmx-label-'+hash);
+	
+	point = ((jQuery('#wmx-label-'+hash).width() + 10) / 2) - 1;
+	
+	marker.set('labelAnchor', new google.maps.Point(point, 0));
+	marker.set('labelClass', 'wmx-label');
+	marker.set('labelStyle', {opacity: 0.75});
+
+}
 
 wmx.getGeocode = function(address, callback) {
 	
@@ -209,17 +229,84 @@ wmx.setMarkerIcon = function(el) {
 
 };
 
+wmx.mapImages = {
+	icon: new google.maps.MarkerImage(
+	                'http://weeverapp.com/media/sprites/default-marker.png',
+	                new google.maps.Size(32, 37),
+	                new google.maps.Point(0,0),
+	                new google.maps.Point(16, 37),
+	                new google.maps.Size(64, 37)
+	              ),              
+	selected: new google.maps.MarkerImage(
+	                'http://weeverapp.com/media/sprites/default-marker.png',
+	                new google.maps.Size(32, 37),
+	                new google.maps.Point(32,0),
+	                new google.maps.Point(16, 37),
+	                new google.maps.Size(64, 37)
+	              ),
+	pin: new google.maps.MarkerImage(
+	                '/media/plg_weevermapsk2/images/point.png',
+	                new google.maps.Size(32, 31),
+	                new google.maps.Point(0,0),
+	                new google.maps.Point(16, 31)
+	              )              
+}
+
+wmx.newMarkerImage = function(spriteUrl) {
+
+	return new google.maps.MarkerImage(
+	                spriteUrl,
+	                new google.maps.Size(32, 37),
+	                new google.maps.Point(0,0),
+	                new google.maps.Point(16, 37),
+	                new google.maps.Size(64, 37)
+	              );
+
+}
+
+wmx.getSettings = function() {
+
+	var latitude 	= '#pluginsweevermapsk2latitude_item',
+		longitude 	= '#pluginsweevermapsk2longitude_item',
+		address	 	= '#pluginsweevermapsk2address_item',
+		label 		= '#pluginsweevermapsk2label_item',
+		markerId 	= '#pluginsweevermapsk2marker_item',
+		kml 		= '#pluginsweevermapsk2kml_item',
+		_dl 		= ";";
+		
+	jQuery('#wmx-kml-url').val( jQuery( kml ).val() );
+	
+	if( !jQuery( latitude ).val() )
+		return;
+		
+	var latArray 	= jQuery( latitude ).val().split( _dl ),
+		longArray 	= jQuery( longitude ).val().split( _dl ),
+		addArray 	= jQuery( address ).val().split( _dl ),
+		labelArray 	= jQuery( label ).val().split( _dl ),
+		markArray 	= jQuery( markerId ).val().split( _dl );
+	
+	for( i=0; i<latArray.length; i++ ) {
+	
+		wmx.addMarker( new google.maps.LatLng( latArray[i], longArray[i]), addArray[i], labelArray[i], wmx.newMarkerImage(markArray[i]) );
+	
+	}
+
+}
+
 wmx.saveSettings = function() {
 
 	wmx.safeClose = true;
 	
-	var latitude = '#pluginsweevermapsk2latitude_item',
-		longitude = '#pluginsweevermapsk2longitude_item',
-		address = '#pluginsweevermapsk2address_item',
-		label = '#pluginsweevermapsk2label_item',
-		markerId = '#pluginsweevermapsk2marker_item',
-		kml = '#pluginsweevermapsk2kml_item',
-		_dl = ";",
+	if(wmx.markers === undefined)
+		return true;
+		
+	var latitude 	= '#pluginsweevermapsk2latitude_item',
+		longitude 	= '#pluginsweevermapsk2longitude_item',
+		address	 	= '#pluginsweevermapsk2address_item',
+		label 		= '#pluginsweevermapsk2label_item',
+		markerId 	= '#pluginsweevermapsk2marker_item',
+		kml 		= '#pluginsweevermapsk2kml_item',
+		_dl 		= ";",
 		latVal = "", longVal = "", addVal = "", labelVal = "", markVal = "";
 
 	for( i=0; i<wmx.markers.length; i++ ) {

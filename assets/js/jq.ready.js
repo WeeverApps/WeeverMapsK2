@@ -155,31 +155,7 @@ jQuery(document).ready(function(){
 
 
 	jQuery("<button id='wmx-geocoder-launch'>GeoTag</button>").insertAfter("#featured1");
-	
-	wmx.mapImages = {
-		icon: new google.maps.MarkerImage(
-		                'http://weeverapp.com/media/sprites/default-marker.png',
-		                new google.maps.Size(32, 37),
-		                new google.maps.Point(0,0),
-		                new google.maps.Point(16, 37),
-		                new google.maps.Size(64, 37)
-		              ),              
-		selected: new google.maps.MarkerImage(
-		                'http://weeverapp.com/media/sprites/default-marker.png',
-		                new google.maps.Size(32, 37),
-		                new google.maps.Point(32,0),
-		                new google.maps.Point(16, 37),
-		                new google.maps.Size(64, 37)
-		              ),
-		pin: new google.maps.MarkerImage(
-		                '/media/plg_weevermapsk2/images/point.png',
-		                new google.maps.Size(32, 31),
-		                new google.maps.Point(0,0),
-		                new google.maps.Point(16, 31)
-		              )
-		              
-	}
-	
+
 	jQuery('#wmx-marker-label-input').keyup(function(e) {
 	
 		if( jQuery('#wmx-marker-label-input').val() == "" ) {
@@ -189,16 +165,7 @@ jQuery(document).ready(function(){
 		
 		} else {
 		
-			var hash = Math.floor((wmx.selectedMarker.position.lat() + wmx.selectedMarker.position.lng()) * 10000);
-			
-			wmx.selectedMarker.set('labelContent', jQuery('#wmx-marker-label-input').val());
-			wmx.selectedMarker.set('labelId', 'wmx-label-'+hash);
-			
-			var point = ((jQuery('#wmx-label-'+hash).width() + 10) / 2) - 1;
-			
-			wmx.selectedMarker.set('labelAnchor', new google.maps.Point(point, 0));
-			wmx.selectedMarker.set('labelClass', 'wmx-label');
-			wmx.selectedMarker.set('labelStyle', {opacity: 0.75});
+			wmx.addLabel();
 		
 		}
 	
@@ -290,6 +257,8 @@ jQuery(document).ready(function(){
 			}
 			else 
 				wmx.map = new google.maps.Map(document.getElementById("wmx-map"), myOptions);
+				
+			wmx.getSettings();
 			
 			google.maps.event.addListener(wmx.map, 'mousemove', function(event) {
 			
