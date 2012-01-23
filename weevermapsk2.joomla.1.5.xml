@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" version="1.6" group="k2">
- <name>WEEVERMAPSK2_PLG_NAME</name>
+<install type="plugin" version="1.5.0" group="k2" method="upgrade">
+ <name>Weever Maps Geotagger for K2</name>
  <creationDate>2012-01-23</creationDate>
  <author>Robert Gerald Porter</author>
  <authorEmail>rob@weeverapps.com</authorEmail>
@@ -9,10 +9,9 @@
  <license>GPLv3</license>
  <version>0.1</version>
  <releaseType>Stable</releaseType>
- <description>WEEVERMAPSK2_PLG_DESCRIPTION</description>
+ <description>Weever Maps Geotagger for K2</description>
  <files>
 	<filename plugin="weevermapsk2">weevermapsk2.php</filename>
-	<filename plugin="weevermapsk2">view.html.php</filename>
 	<folder>weevermapsk2</folder>
  </files>
 	
@@ -38,4 +37,4 @@
 	<filename>index.html</filename>
  </media>
 
-</extension>
+</install>
