@@ -33,6 +33,8 @@ defined('_JEXEC') or die;
 
 ?>
 
+<input type='hidden' id='wmx-legacy' value='<?php echo $legacyMode; ?>'>
+
 <div id='wmx-dialog' title='&lt;img id=&quot;wmx-logo&quot; src=&quot;/media/plg_weevermapsk2/images/weever.png&quot;&gt; <?php echo $this->pluginNameHumanReadable; ?> v<?php echo $this->pluginVersion; ?>'>
 		<div id='wmx-address'>
 			<input type='text' id='wmx-address-input' placeholder='<?php echo JText::_('WEEVERMAPSK2_ADDRESS_PLACEHOLDER'); ?>' value='<?php echo JText::_('WEEVERMAPSK2_ADDRESS_VALUE'); ?>' />

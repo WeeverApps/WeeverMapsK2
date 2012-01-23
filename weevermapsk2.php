@@ -73,6 +73,18 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 			
 		}
 		
+		// detect old method of geotagging K2 content
+		// to fail detection, delete the "geo" extra field group
+	
+		$db = &JFactory::getDBO();					
+		$query = "SELECT * FROM #__k2_extra_fields_groups WHERE name = ".$db->Quote("geo");
+		$db->setQuery($query);
+		$results = @$db->loadObjectList();
+		
+		if( !empty($results) )
+			$legacyMode = 1;
+		else 
+			$legacy = 0;		
 		
 		include JPATH_PLUGINS.DS.'k2'.DS.'weevermapsk2'.DS.'view.html.php';
 		

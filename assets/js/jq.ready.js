@@ -279,12 +279,16 @@ jQuery(document).ready(function(){
 		e.preventDefault();
 		
 		var loadDialog = function() {
-			
-			var myOptions = {
+		
+			var legacy = jQuery('#wmx-legacy').val(),			
+				myOptions = {
 			          center: new google.maps.LatLng(43.243603, -79.889074),
 			          zoom: 8,
 			          mapTypeId: google.maps.MapTypeId.ROADMAP
 			        };
+			        
+			if(legacy)
+				alert("Old Geotagging data detected. Before you can use maps created through this tool, you must copy the old data from the K2 'Extra Fields' tab to the 'K2 Plugins' tab. Once this is done, delete the 'geo' Extra Fields Group in K2, then data created with this tool will be used and this message will no longer appear. If you need the 'geo' group for other purposes, please contact support for assistance.");
 			        
 			if(wmx.map instanceof google.maps.Map)
 			{
