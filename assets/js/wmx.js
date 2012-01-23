@@ -103,12 +103,16 @@ wmx.addMarker = function(position, address, labelContent, icon) {
 	        	height: 'auto',
 	        	buttons: {
 	        		Done: function() {
+	        		
+	        			marker.set('address', jQuery('#mwx-marker-address-input').val() )
 	        			jQuery(this).dialog( "close" );
+	        			
 	        		}			
 	        	},
 	        	open: function(e, ui) {
 	        	
 	        		jQuery('#wmx-marker-label-input').val( marker.get('labelContent') );
+	        		jQuery('#mwx-marker-address-input').val( marker.get('address') );
 	        	
 	        	}
 	        		        	

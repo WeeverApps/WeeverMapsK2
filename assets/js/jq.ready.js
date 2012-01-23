@@ -96,6 +96,18 @@ jQuery(document).ready(function(){
 	    
 	});
 	
+	jQuery("input#wmx-marker-label-input").bind("keypress", function (e) {
+	
+	    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+	        jQuery('#wmx-marker-dialog').dialog('close');
+	        return false;
+	    } else {
+	        return true;
+	    }
+	    
+	});
+	
+	
 	jQuery('#wmx-latlong-add-marker').click(function(event){
 	
 		wmx.position = new google.maps.LatLng( 
@@ -256,10 +268,13 @@ jQuery(document).ready(function(){
 				
 			}
 			else 
-				wmx.map = new google.maps.Map(document.getElementById("wmx-map"), myOptions);
+			{
 				
-			wmx.getSettings();
-			
+				wmx.map = new google.maps.Map(document.getElementById("wmx-map"), myOptions);
+				wmx.getSettings();
+				
+			}
+				
 			google.maps.event.addListener(wmx.map, 'mousemove', function(event) {
 			
 				document.getElementById('wmx-lat-hover').value = event.latLng.lat();

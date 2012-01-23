@@ -12,6 +12,7 @@
  <description>WEEVERMAPSK2_PLG_DESCRIPTION</description>
  <files>
 	<filename plugin="weevermapsk2">weevermapsk2.php</filename>
+	<filename plugin="weevermapsk2">view.html.php</filename>
 	<folder>weevermapsk2</folder>
  </files>
 	

@@ -29,21 +29,34 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 	public 	$pluginName = 'weevermapsk2';
 	public 	$pluginNameHumanReadable;
 	public  $pluginVersion = "0.1";
+	public  $joomlaVersion;
 
 	public function __construct(&$subject, $params) 
 	{
+		
+		$app =& JFactory::getApplication();
+		
+		if( !$app->isAdmin() )
+			return false;
 		
 		JPlugin::loadLanguage('plg_k2_'.$this->pluginName, JPATH_ADMINISTRATOR);
 		
 		$this->pluginNameHumanReadable = JText::_('WEEVERMAPSK2_PLG_NAME');
 		
 		$version = new JVersion;
-		$joomla = $version->getShortVersion();
+		$this->joomlaVersion = substr($version->getShortVersion(), 0, 3);
 		
-		if(substr($joomla,0,3) == '1.5')
+		if(JRequest::getVar("view") != "item")
+			return false;
+		
+		// Javascript localization assignment. All localized Javascript strings must register here.
+		
+		if($this->joomlaVersion == '1.5')
 		{
 
-			require_once JPATH_PLUGINS.DS.'k2'.DS.'weevermapsk2'.DS.'jsjtext15.php';
+			// Joomla 1.5 does not support Javascript localization. This adds support.
+
+			include_once JPATH_PLUGINS.DS.'k2'.DS.'weevermapsk2'.DS.'jsjtext15.php';
 			
 			jsJText::script('WEEVERMAPSK2_CONFIRM_CLOSE');
 			jsJText::script('WEEVERMAPSK2_ERROR_NO_RESULTS');
@@ -55,116 +68,12 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		
 			JText::script('WEEVERMAPSK2_CONFIRM_CLOSE');
 			JText::script('WEEVERMAPSK2_ERROR_NO_RESULTS');
+			
 		}
 		
-		$document = &JFactory::getDocument();
-		$document->addScript( 'http://maps.googleapis.com/maps/api/js?sensor=false' );
-		$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'markerwithlabel.js' );
-		$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.js' );
-		$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'jq.ready.js' );
-
-		$document->addStyleSheet(DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'wmx.css', 'text/css', null, array());
-		$document->addStyleSheet(DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'jquery.ui.css', 'text/css', null, array());
 		
-		echo "<div id='wmx-dialog' title='&lt;img id=&quot;wmx-logo&quot; src=&quot;/media/plg_weevermapsk2/images/weever.png&quot;&gt; ".$this->pluginNameHumanReadable." v".$this->pluginVersion."'>
-				<div id='wmx-address'>
-					<input type='text' id='wmx-address-input' placeholder='".JText::_('WEEVERMAPSK2_ADDRESS_PLACEHOLDER')."' value='".JText::_('WEEVERMAPSK2_ADDRESS_VALUE')."' />
-					<button id='wmx-address-geocode'>".JText::_('WEEVERMAPSK2_ADDRESS_GO')."</button> 
-					<button id='wmx-address-add-marker'>".JText::_('WEEVERMAPSK2_ADDRESS_ADD_MARKER')."</button>
-				</div>
-				<div id='wmx-map'>This will be a map.</div>
-				<div id='wmx-map-console'>
-				
-					<div id='wmx-instructions'><span>".JText::_('WEEVERMAPSK2_INSTRUCTIONS')."</span></div>
-					
-					<div id='wmx-console-options'>
-					
-						<div id='wmx-latlong-container' class='wmx-console-container-widget'>
-						
-							<div id='wmx-latlong-title' class='wmx-title'>".JText::_('WEEVERMAPSK2_GPS_POSITION')."</div>
-							
-							<div id='wmx-latlong-stats-container'>
-								<div id='wmx-latitude'>
-									<div class='wmx-hover-label'><label for='wmx-lat-hover'>".JText::_('WEEVERMAPSK2_LAT_COLON')."</label></div>
-									<input type='text' id='wmx-lat-hover' />
-								</div>
-								
-								<div id='wmx-longitude'>
-									<div class='wmx-hover-label'><label for='wmx-long-hover'>".JText::_('WEEVERMAPSK2_LONG_COLON')."</label></div>
-									<input type='text' id='wmx-long-hover' />
-								</div>
-							</div>
-							
-							<div id='wmx-gps-center'>
-								<button class='wmx-latlong-button' id='wmx-latlong-location'>".JText::_('WEEVERMAPSK2_LAT_LONG_GO')."</button>
-							</div>
-							
-							<div id='wmx-latlong-button-container'>
-								<button class='wmx-latlong-button' id='wmx-gps-location'>".JText::_('WEEVERMAPSK2_MY_LOCATION')."</button> 
-								<button class='wmx-latlong-button' id='wmx-latlong-add-marker'>".JText::_('WEEVERMAPSK2_LAT_LONG_ADD_MARKER')."</button>
-							</div>
-							
-						</div>
-						
-						<div id='wmx-marker-container' class='wmx-console-container-widget'>
-						
-							<div id='wmx-right-marker'>				
-								<img src='http://weeverapp.com/media/sprites/default-marker.png' id='wmx-marker-image' /><br />
-							</div>
-							
-							<div id='wmx-right-marker-buttons'>
-								<input type='hidden' name='wmx-marker-url' id='wmx-marker-url' value='' />
-								<button id='wmx-select-marker'>".JText::_('WEEVERMAPSK2_CHOOSE_MARKER_ICON')."</button><br />
-							</div>
-							
-						</div>
-						
-						<div id='wmx-options-container' class='wmx-console-container-widget'>
-							
-							<div id='wmx-options-title' class='wmx-title'>".JText::_('WEEVERMAPSK2_OTHER_OPTIONS')."</div>
-							<button id='wmx-add-kml'>".JText::_('WEEVERMAPSK2_ADD_KML_FILE')."</button> 
-							
-						</div>
-						
-					</div>
-					
-				</div>
-				
-			</div>
-			
-			<div id='wmx-marker-dialog' title='".JText::_('WEEVERMAPSK2_EDIT_MARKER')."'>
-				
-				<div id='wmx-marker-dialog-options-container'>
-					<div class='wmx-title'>".JText::_('WEEVERMAPSK2_MARKER_OPTIONS')."</div>
-					<label class='wmx-marker-button' for='wmx-marker-label-input'>".JText::_('WEEVERMAPSK2_MARKER_LABEL_COLON')."</label>
-					<input id='wmx-marker-label-input' type='text' class='wmx-marker-button'  placeholder='".JText::_('WEEVERMAPSK2_MARKER_LABEL')."' /><br />
-					<input type='button' id='wmx-marker-change-icon' class='wmx-marker-button' value='".JText::_('WEEVERMAPSK2_CHANGE_ICON_ELLIPSIS')."' /><br />
-					<input type='hidden' id='wmx-marker-icon' name='wmx-marker-icon' value='' />
-					<input type='button' id='wmx-marker-delete' class='wmx-marker-button' value='".JText::_('WEEVERMAPSK2_DELETE_MARKER')."' />
-				</div>
-				
-			</div>
-			
-			<div id='wmx-kml-dialog' title='".JText::_('WEEVERMAPSK2_ADD_KML_FILE')."'>
-				
-				<div id='wmx-kml-dialog-container'>
-					<input type='text' id='wmx-kml-url' value='' placeholder='http://' /><br />
-					<!--button id='wmx-kml-media'>".JText::_('WEEVERMAPSK2_FILE_FROM_SERVER_ELLIPSIS')."</button-->
-					<span>".JText::_('WEEVERMAPSK2_KML_INSTRUCTIONS')."</span>
-				</div>
-				
-			</div>
-			
-			<div id='wmx-close-dialog' title='".JText::_('WEEVERMAPSK2_ARE_YOU_SURE')."'>
-				
-				<div>
-					".JText::_('WEEVERMAPSK2_CONFIRM_CLOSE')."
-				</div>
-				
-			</div>
-			";
+		include JPATH_PLUGINS.DS.'k2'.DS.'weevermapsk2'.DS.'view.html.php';
 		
-	
 		parent::__construct($subject, $params);
 		
 	}
@@ -172,17 +81,35 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 	
 	public function onAfterK2Save(&$item, $isNew) {
 		
-		$geoData = json_decode($item->plugins);
+		if($this->joomlaVersion == '1.5')
+		{
 		
-		$geoLatArray = explode(";", $geoData->weevermapsk2latitude_item);
-		$geoLongArray = explode(";", $geoData->weevermapsk2longitude_item);
-		$geoAddressArray = explode(";", $geoData->weevermapsk2address_item);
-		$geoLabelArray = explode(";", $geoData->weevermapsk2label_item);
-		$geoMarkerArray = explode(";", $geoData->weevermapsk2marker_item);
+			// K2 for Joomla 1.5 stores $item->plugin as INI string rather than JSON
+			// ... and Joomla 1.5 has its own INI parsing class, JRegistry.
+		
+			$registry	= new JRegistry();
+			$registry->loadINI($item->plugins);
+			$geoData	= $registry->toObject( );
+			
+		}
+		else 
+		{
+		
+			// K2 for Joomla 1.6+ is normal.
+		
+			$geoData = json_decode($item->plugins);
+			
+		}
+		
+		$geoLatArray = 		explode( 	";", rtrim( $geoData->weevermapsk2latitude_item, 	";") 	);
+		$geoLongArray = 	explode( 	";", rtrim( $geoData->weevermapsk2longitude_item, 	";") 	);
+		$geoAddressArray = 	explode( 	";", rtrim( $geoData->weevermapsk2address_item, 	";") 	);
+		$geoLabelArray = 	explode( 	";", rtrim( $geoData->weevermapsk2label_item, 		";") 	);
+		$geoMarkerArray = 	explode( 	";", rtrim( $geoData->weevermapsk2marker_item, 		";") 	);
 		
 		$db = &JFactory::getDBO();
 		
-		$query = " DELETE FROM #__weever_maps 
+		$query = " 	DELETE FROM #__weever_maps 
 					WHERE
 						component_id = ".$db->Quote($item->id)."
 						AND
@@ -190,7 +117,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 						
 	
 		$db->setQuery($query);
-		$result = $db->loadObject();
+		$db->query();
 		
 		foreach( (array) $geoLatArray as $k=>$v )
 		{
@@ -206,7 +133,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 						
 		
 			$db->setQuery($query);
-			$result = $db->loadObject();
+			$db->query();
 		
 		}
 		
@@ -219,11 +146,9 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 					"	VALUES ('".$item->id."', 'com_k2', ".$db->Quote($geoData->weevermapsk2kml_item).")";
 			
 			$db->setQuery($query);
-			$result = $db->loadObject();
-		
+			$db->query();
+
 		}
-		
-		
 		
 		/*
 		
