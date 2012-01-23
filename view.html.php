@@ -89,7 +89,9 @@ defined('_JEXEC') or die;
 				<div id='wmx-options-container' class='wmx-console-container-widget'>
 					
 					<div id='wmx-options-title' class='wmx-title'><?php echo JText::_('WEEVERMAPSK2_OTHER_OPTIONS'); ?></div>
-					<button id='wmx-add-kml'><?php echo JText::_('WEEVERMAPSK2_ADD_KML_FILE'); ?></button> 
+				
+					<button id='wmx-add-kml'><?php echo JText::_('WEEVERMAPSK2_ADD_KML_FILE'); ?></button><br /><br />
+					<button id='wmx-about-plugin'><?php echo JText::_('WEEVERMAPSK2_ABOUT_PLUGIN'); ?></button> 
 					
 				</div>
 				
@@ -112,6 +114,18 @@ defined('_JEXEC') or die;
 		</div>
 		
 	</div>
+	
+	<div id='wmx-about-plugin-dialog' title='<?php echo JText::_('WEEVERMAPSK2_ABOUT_PLUGIN'); ?>'>
+	
+		<div id='wmx-about-logo'><img src='/media/plg_weevermapsk2/images/weever-logo.png' /></div>
+		<h3><?php echo $this->pluginNameHumanReadable; ?>, <?php echo $this->pluginLongVersion; ?></h3>
+		<div id='wmx-about-text'>
+			<?php echo JText::_('WEEVERMAPSK2_ABOUT_PLUGIN_TEXT'); ?>
+			<p><?php echo JText::_('WEEVERMAPSK2_RELEASED')." ".$this->pluginReleaseDate; ?></p>
+		</div>
+	
+	</div>
+	
 	
 	<div id='wmx-kml-dialog' title='<?php echo JText::_('WEEVERMAPSK2_ADD_KML_FILE'); ?>'>
 		

@@ -243,7 +243,23 @@ jQuery(document).ready(function(){
 		else
 			alert('geolocation not supported');
 
+	});
+	
+	jQuery('#wmx-about-plugin').click(function(e) {
+	
+		e.preventDefault();
 		
+		jQuery("#wmx-about-plugin-dialog").dialog({
+			modal: true, 
+			resizable: false,
+			width: 'auto',
+			height: 'auto',
+			buttons: {
+				Done: function() {
+					jQuery(this).dialog( "close" );
+				}		
+			}
+		}); 
 	
 	});
 	
@@ -254,7 +270,7 @@ jQuery(document).ready(function(){
 		var loadDialog = function() {
 			
 			var myOptions = {
-			          center: new google.maps.LatLng(-34.397, 150.644),
+			          center: new google.maps.LatLng(43.243603, -79.889074),
 			          zoom: 8,
 			          mapTypeId: google.maps.MapTypeId.ROADMAP
 			        };

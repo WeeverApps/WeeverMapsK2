@@ -321,11 +321,11 @@ wmx.saveSettings = function() {
 		longVal = longVal + marker.position.lng() + _dl;
 		
 		if(marker.address != null)
-			addVal = addVal + marker.address + _dl;
+			addVal = addVal + marker.address.replace(/;/, "") + _dl;
 		else   
 			addVal = addVal  + _dl;
 			
-		labelVal = labelVal + marker.labelContent + _dl;
+		labelVal = labelVal + marker.labelContent.replace(/;/, "") + _dl;
 		markVal = markVal + marker.icon.url + _dl;
 	
 	}

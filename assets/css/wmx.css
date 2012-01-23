@@ -19,7 +19,7 @@
 */
 
 
-#wmx-dialog, #wmx-marker-dialog, #wmx-close-dialog, #wmx-kml-dialog {
+#wmx-dialog, #wmx-marker-dialog, #wmx-close-dialog, #wmx-kml-dialog, #wmx-about-plugin-dialog {
 	display: none;
 	background-color: #fff;
 	border: 1px solid #999;
@@ -139,7 +139,7 @@ button#wmx-geocoder-launch {
 }
 
 #wmx-options-container {
-	max-width: 185px;
+	max-width: 105px;
 }
 
 #wmx-latlong-stats-container {
@@ -209,4 +209,8 @@ button#wmx-geocoder-launch {
 
 #wmx-kml-url {
 	width: 20em;
+}
+
+#wmx-about-logo {
+	margin-top: 1em;
 }

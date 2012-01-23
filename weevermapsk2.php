@@ -29,6 +29,8 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 	public 	$pluginName = 'weevermapsk2';
 	public 	$pluginNameHumanReadable;
 	public  $pluginVersion = "0.1";
+	public	$pluginLongVersion = "Version 0.1 \"Anaximander\" (beta)";
+	public  $pluginReleaseDate = "January 23, 2012";
 	public  $joomlaVersion;
 
 	public function __construct(&$subject, $params) 
