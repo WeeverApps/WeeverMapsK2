@@ -85,6 +85,17 @@ jQuery(document).ready(function(){
 	
 	});
 	
+	jQuery("input#wmx-address-input").bind("keyup", function (e) {
+	
+		var addressInput = jQuery("#wmx-address-input");
+	
+		if ( !addressInput.val() || addressInput.val() == addressInput[0].defaultValue )
+			jQuery("#wmx-address-add-marker").attr("disabled","disabled");
+		else
+			jQuery("#wmx-address-add-marker").removeAttr("disabled");
+			
+	});
+	
 	jQuery("input#wmx-address-input").bind("keypress", function (e) {
 	
 	    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
@@ -142,7 +153,7 @@ jQuery(document).ready(function(){
 		{
 		
 			wmx.map.setCenter(wmx.position);
-			wmx.addMarker(wmx.position);
+			wmx.addMarker(wmx.position, address);
 			
 			if(wmx.pin instanceof google.maps.Marker)
 				wmx.pin.setMap(null);
@@ -166,7 +177,7 @@ jQuery(document).ready(function(){
 	});
 
 
-	jQuery("<button id='wmx-geocoder-launch'>GeoTag</button>").insertAfter("#featured1");
+	jQuery("<div id='wmx-geocoder-launch'>GeoTag</div>").insertAfter("#featured1");
 
 	jQuery('#wmx-marker-label-input').keyup(function(e) {
 	

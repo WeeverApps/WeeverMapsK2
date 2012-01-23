@@ -37,7 +37,7 @@ defined('_JEXEC') or die;
 		<div id='wmx-address'>
 			<input type='text' id='wmx-address-input' placeholder='<?php echo JText::_('WEEVERMAPSK2_ADDRESS_PLACEHOLDER'); ?>' value='<?php echo JText::_('WEEVERMAPSK2_ADDRESS_VALUE'); ?>' />
 			<button id='wmx-address-geocode'><?php echo JText::_('WEEVERMAPSK2_ADDRESS_GO'); ?></button> 
-			<button id='wmx-address-add-marker'><?php echo JText::_('WEEVERMAPSK2_ADDRESS_ADD_MARKER'); ?></button>
+			<button id='wmx-address-add-marker' disabled='disabled'><?php echo JText::_('WEEVERMAPSK2_ADDRESS_ADD_MARKER'); ?></button>
 		</div>
 		<div id='wmx-map'>This will be a map.</div>
 		<div id='wmx-map-console'>

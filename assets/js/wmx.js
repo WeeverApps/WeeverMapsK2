@@ -49,18 +49,16 @@ wmx.addMarker = function(position, address, labelContent, icon) {
 
 	wmx.markers = wmx.markers || [];
 	
-	var address = address || jQuery('#wmx-address-input').val(),
-		icon 	= icon || wmx.mapImages.icon;
-		
-	if( address == jQuery('#wmx-address-input')[0].defaultValue )
-		address = null;
+	var	icon 	= icon || wmx.mapImages.icon,
+		hash 	= Math.floor((position.lat() + position.lng()) * 10000);
 
 	var marker = new MarkerWithLabel({
 	       position: position,
 	       draggable: true,
 	       map: wmx.map,
 	       icon: icon,
-	       address: address
+	       address: address,
+	       labelId: 'wmx-label-'+hash
 	     });
 	     
 	if(labelContent) 
@@ -141,13 +139,21 @@ wmx.addLabel = function(marker, labelContent) {
 		hash 			= Math.floor((marker.position.lat() + marker.position.lng()) * 10000);
 	
 	marker.set('labelContent', labelContent );
-	marker.set('labelId', 'wmx-label-'+hash);
 	
-	point = ((jQuery('#wmx-label-'+hash).width() + 10) / 2) - 1;
+	// Timeout for when launching window with pre-existing labels.
+	setTimeout(function() {
 	
-	marker.set('labelAnchor', new google.maps.Point(point, 0));
-	marker.set('labelClass', 'wmx-label');
-	marker.set('labelStyle', {opacity: 0.75});
+		var point = ((jQuery('#wmx-label-'+hash).width() + 10) / 2) - 1;
+		
+		if(point < 5)
+			point = 22;
+		
+		marker.set('labelAnchor', new google.maps.Point(point, 0));
+		marker.set('labelClass', 'wmx-label');
+		marker.set('labelStyle', {opacity: 0.75});
+	
+	}, 750);
+	
 
 }
 

@@ -103,6 +103,16 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 			
 		}
 		
+		if($geoData->weevermapsk2altitude_item == "wxdebug") 
+		{
+		
+			print_r($item->plugins);
+			echo "\n\n\n";
+			print_r($geoData);
+
+		}
+			
+		
 		$geoLatArray = 		explode( 	";", rtrim( $geoData->weevermapsk2latitude_item, 	";") 	);
 		$geoLongArray = 	explode( 	";", rtrim( $geoData->weevermapsk2longitude_item, 	";") 	);
 		$geoAddressArray = 	explode( 	";", rtrim( $geoData->weevermapsk2address_item, 	";") 	);
@@ -121,6 +131,10 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		$db->setQuery($query);
 		$db->query();
 		
+		
+		if($geoData->weevermapsk2altitude_item == "wxdebug") 
+			echo $query;
+		
 		foreach( (array) $geoLatArray as $k=>$v )
 		{
 		
@@ -136,6 +150,10 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		
 			$db->setQuery($query);
 			$db->query();
+			
+			
+			if($geoData->weevermapsk2altitude_item == "wxdebug") 
+				echo $query;
 		
 		}
 		
@@ -149,8 +167,16 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 			
 			$db->setQuery($query);
 			$db->query();
+			
+			
+			if($geoData->weevermapsk2altitude_item == "wxdebug") 
+				echo $query;
 
 		}
+		
+		
+		if($geoData->weevermapsk2altitude_item == "wxdebug") 
+			jexit();
 		
 		/*
 		
