@@ -177,7 +177,7 @@ jQuery(document).ready(function(){
 	});
 
 
-	jQuery("<div id='wmx-geocoder-launch'>GeoTag</div>").insertAfter("#featured1");
+	jQuery("<div id='wmx-geocoder-launch'>GeoTagger</div>").insertAfter("#featured1");
 
 	jQuery('#wmx-marker-label-input').keyup(function(e) {
 	
