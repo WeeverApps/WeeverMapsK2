@@ -44,6 +44,8 @@
 
 .wmx-label {
      color: #990000;
+     border: 2px solid #454545;
+     box-shadow: 2px 3px 3px #999999;
      background-color: white;
      font-family: "Lucida Grande", "Arial", sans-serif;
      font-size: 0.85em;
@@ -92,18 +94,17 @@ div#wmx-geocoder-launch:hover {
 }
 
 #wmx-marker-image {
-	width: 128px;
-	height: auto;
-	margin-top: 6px;
-	margin-right: 12px;
+    height: auto;
+    width:64px;
+    margin: 0;
 }
 
 #wmx-right-marker {
-	text-align: center;
-	background-image: url(../images/marker-specs.png);
-	background-repeat: no-repeat;
-	background-position: top center;
-	height: 90px;
+    background-image: none;
+    background-repeat: no-repeat;
+    display: block;
+    overflow: hidden;
+    text-align: center;
 }
 
 #wmx-right-marker-buttons {
@@ -111,19 +112,21 @@ div#wmx-geocoder-launch:hover {
 }
 
 .wmx-console-container-widget {
-	margin: 0.5em;
-	margin-top: 0.25em;
-	margin-bottom: 0;
-	font-size: 1.125em;
-	padding: 0.5em;
-	float: left;
-	height: 115px;
-	background-color: #f3f3f3;	
-	border: 1px solid #d3d3d3;
+    background-color: #F3F3F3;
+    border: 1px solid #D3D3D3;
+    float: left;
+    font-size: 1.125em;
+    margin: 0;
+    min-height: 120px;
+    overflow: visible;
+    padding: 0.75em;
 }
 
 #wmx-console-options {
-	text-align:center;
+    display: block;
+    margin-top: 1em;
+    overflow: hidden;
+    width: 100%;
 }
 
 #wmx-marker-container {
@@ -131,82 +134,103 @@ div#wmx-geocoder-launch:hover {
 }
 
 #wmx-select-marker {
-	margin-top: 0.25em;
+    margin-top: 0.5em;
 }
 
 #wmx-logo {
-	height: 1em;
-	width: auto;
+    height: 24px;
+    width: auto;
 }
 
 .wmx-title {
-	text-align: center;
-	color: #3388ff;
-	font-size: 1.125em;
-	margin-bottom: 0.5em;
+    color: #3388FF;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    text-align: left;
 }
 
 #wmx-latitude, #wmx-longitude {
-	width: 240px;
+    margin: 0.25em 0.25em 0 0;
+    width: auto;
 }
 
 #wmx-latlong-title {
-	padding: 0.5em;
-	padding-top: 0;
+    margin: 0 0 .5em;
+    padding: 0;
 }
 
-.wmx-latlong-button-container {
-	text-align: center;
-	width: 100%;
+.wmx-latlong-button {
+    font-size: 0.85em;
+    margin: 1.5em 0.5em 0 0;
+}
+
+#wmx-latlong-button-container {
+ 	clear: both;
+    display: block;
+    overflow: auto;
 }
 
 #wmx-latlong-container {
-	width: 310px;
+    min-width: 280px;
 }
 
 #wmx-options-container {
-	max-width: 105px;
+    display: inline-block;
+    margin: 0;
+    min-width: 154px;
+    position: absolute;
+    right: 0.75em;
 }
 
 #wmx-latlong-stats-container {
-	float: left;
-	width: 200px;
+    float: left;
+	width:auto;
 }
 
 #wmx-gps-center {
-	
+    display: block;
+    margin-top: 0.75em;
+    overflow: hidden;
 }
 
 #wmx-latlong-location {
-	margin: 0;
-	margin-left: 2px;
-	padding-top: 1px;
-	padding-bottom: 1px;
-	height: 3em;
-	width: 4em;
-	margin-bottom: 0.5em;
+    border-radius: .25em;
+    -webkit-border-radius: .25em;
+    box-shadow: 0 0 2px #DDDDDD;
+    height: 3.5em;
+    margin: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    width: 4em;
 }
 
 .wmx-hover-label {
-	width: 33%;
-	float: left;
-	text-align:right;
+    float: left;
+    margin-right: 0.75em;
+    text-align: left;
+   min-width: 33%;
 }
 
 #wmx-lat-hover, #wmx-long-hover {
-	width: 8.5em;
+    min-width: 10em;
+    padding: 0 0.125em 0 0.25em;
 }
 
 #wmx-address {
-	margin-bottom: 0.35em;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 0.25em .75em 0;
 }
 
+
 #wmx-address-input {
-	font-size: 1.125em;
-	width: 480px;
-	margin: 0.325em;
-	margin-bottom: 0;
-	margin-left: 0;
+    background: lightyellow;
+    color: #333333;
+    font-family: arial,helvetica,sans-serif;
+    font-size: 1.25em;
+    margin: 0 0.25em 0 0;
+    padding: 0.25em;
+    width: 480px;
 }
 
 .wmx-latlong-button {
@@ -215,18 +239,17 @@ div#wmx-geocoder-launch:hover {
 }
 
 #wmx-instructions {
-	font-size: 0.925em;
-	padding: 0.125em;
+    font-size: 1em;
+    padding: 0.25em 0;
 }
 
 #wmx-map-console {
-	text-align:center;
-	max-width: 670px;
-	padding-top: 0.25em;
+    text-align: left;
 }
 
 #wmx-add-kml {
-	margin-top: 0.5em;
+    display: block;
+    margin: 0;
 }
 
 #wmx-kml-dialog-container {

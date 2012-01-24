@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" version="1.6" group="k2">
+
  <name>WEEVERMAPSK2_PLG_NAME</name>
  <creationDate>2012-01-23</creationDate>
  <author>Robert Gerald Porter</author>
@@ -10,6 +11,7 @@
  <version>0.1</version>
  <releaseType>Stable</releaseType>
  <description>WEEVERMAPSK2_PLG_DESCRIPTION</description>
+ 
  <files>
 	<filename plugin="weevermapsk2">weevermapsk2.php</filename>
 	<filename plugin="weevermapsk2">view.html.php</filename>

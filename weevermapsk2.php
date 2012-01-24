@@ -23,7 +23,6 @@ defined('_JEXEC') or die;
 
 JLoader::register('K2Plugin', JPATH_ADMINISTRATOR.DS.'components'.DS.'com_k2'.DS.'lib'.DS.'k2plugin.php');
 
-
 class plgK2WeeverMapsK2 extends K2Plugin {
 
 	public 	$pluginName = 'weevermapsk2';
@@ -48,7 +47,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		$version = new JVersion;
 		$this->joomlaVersion = substr($version->getShortVersion(), 0, 3);
 		
-		if(JRequest::getVar("view") != "item")
+		if( JRequest::getVar("view") != "item" || JRequest::getVar("task") != "" )
 			return false;
 		
 		// Javascript localization assignment. All localized Javascript strings must register here.
@@ -74,7 +73,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		}
 		
 		// detect old method of geotagging K2 content
-		// to fail detection, delete the "geo" extra field group
+		// to fail detection, delete the "geo" Extra Field Group
 	
 		$db = &JFactory::getDBO();					
 		$query = "SELECT * FROM #__k2_extra_fields_groups WHERE name = ".$db->Quote("geo");
@@ -119,7 +118,6 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		{
 		
 			print_r($item->plugins);
-			echo "\n\n\n";
 			print_r($geoData);
 
 		}
