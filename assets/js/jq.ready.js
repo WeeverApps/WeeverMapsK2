@@ -335,7 +335,7 @@ jQuery(document).ready(function(){
 					wmx.saveSettings();
 					jQuery(this).dialog( "close" );
 					wmx.safeClose = false;
-				},			
+				}		
 			},
 			open: loadDialog(),
 			beforeClose: function() {
