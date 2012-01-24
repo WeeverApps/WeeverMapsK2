@@ -76,9 +76,11 @@ defined('_JEXEC') or die;
 				</div>
 				
 				<div id='wmx-marker-container' class='wmx-console-container-widget'>
-				
+				                <div class="wmx-title" id="wmx-latlong-title"><?php echo JText::_('WEEVERMAPSK2_MAP_MARKER'); ?></div>
+
 					<div id='wmx-right-marker'>				
-						<img src='http://weeverapp.com/media/sprites/default-marker.png' id='wmx-marker-image' /><br />
+						<img src='http://weeverapp.com/media/sprites/default-marker.png' id='wmx-marker-image' />
+                        <span id="wx-right-marker-description"><?php echo JText::_('WEEVERMAPSK2_SUPPORT_INSTRUCTIONS'); ?></span>	
 					</div>
 					
 					<div id='wmx-right-marker-buttons'>
@@ -92,7 +94,7 @@ defined('_JEXEC') or die;
 					
 					<div id='wmx-options-title' class='wmx-title'><?php echo JText::_('WEEVERMAPSK2_OTHER_OPTIONS'); ?></div>
 				
-					<button id='wmx-add-kml'><?php echo JText::_('WEEVERMAPSK2_ADD_KML_FILE'); ?></button><br /><br />
+					<button id='wmx-add-kml'><?php echo JText::_('WEEVERMAPSK2_ADD_KML_FILE'); ?></button>
 					<button id='wmx-about-plugin'><?php echo JText::_('WEEVERMAPSK2_ABOUT_PLUGIN'); ?></button> 
 					
 				</div>
