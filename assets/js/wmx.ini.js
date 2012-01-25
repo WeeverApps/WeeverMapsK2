@@ -1,4 +1,3 @@
-<?php
 /*	
 *	Weever Geotagger for K2
 *	(c) 2012 Weever Apps Inc. <http://www.weeverapps.com/>
@@ -19,19 +18,17 @@
 *
 */
 
-
 var wmx = wmx || {};
+
+wmx.txt = {};
 
 // define localized text strings
 wmx.localText = {
 
-	WEEVERMAPS_ERROR_NO_RESULTS: 'WEEVERMAPSK2_ERROR_NO_RESULTS',
-	WEEVERMAPS_CONFIRM_CLOSE: 'WEEVERMAPSK2_CONFIRM_CLOSE'
+	"WEEVERMAPS_ERROR_NO_RESULTS": 	'WEEVERMAPSK2_ERROR_NO_RESULTS',
+	"WEEVERMAPS_CONFIRM_CLOSE": 	'WEEVERMAPSK2_CONFIRM_CLOSE'
 	
-}
-
-// set the localization object
-wmx._txt = function(text) {	Joomla.JText._( wmx.localText(text) ); }
+};
 
 // input fields for form
 wmx.inputField = {
@@ -44,3 +41,13 @@ wmx.inputField = {
 	kml: '#pluginsweevermapsk2kml_item'
 
 }
+
+// definitions set at document ready
+
+jQuery(document).ready(function(){ 
+
+	// our localized text object loader
+	wmx._textLoader = Joomla.JText;
+
+});
+
