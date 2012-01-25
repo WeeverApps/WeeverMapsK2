@@ -4,7 +4,7 @@
 *	(c) 2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter (rob@weeverapps.com)
-*	Version: 	0.1
+*	Version: 	0.2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -27,8 +27,8 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 
 	public 	$pluginName = 'weevermapsk2';
 	public 	$pluginNameHumanReadable;
-	public  $pluginVersion = "0.1";
-	public	$pluginLongVersion = "Version 0.1 \"Anaximander\" (beta)";
+	public  $pluginVersion = "0.2";
+	public	$pluginLongVersion = "Version 0.2 \"Behaim\" (beta)";
 	public  $pluginReleaseDate = "January 24, 2012";
 	public  $joomlaVersion;
 
