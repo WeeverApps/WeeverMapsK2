@@ -25,7 +25,9 @@ defined('_JEXEC') or die;
 	$document = &JFactory::getDocument();
 	$document->addScript( 'http://maps.googleapis.com/maps/api/js?sensor=false' );
 	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'markerwithlabel.js' );
+	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.ini.js' );
 	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.js' );
+	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.k2.js' );
 	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'jq.ready.js' );
 
 	$document->addStyleSheet(DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'wmx.css', 'text/css', null, array());

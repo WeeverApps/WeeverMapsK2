@@ -1,9 +1,9 @@
 /*	
-*	Weever Maps for K2
+*	Weever Geotagger Core
 *	(c) 2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter (rob@weeverapps.com)
-*	Version: 	0.1
+*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
+*	Version: 	0.2
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -21,41 +21,7 @@
 
 
 jQuery(document).ready(function(){ 
- 
-	jQuery('#wmx-select-marker').click(function(event){
-		event.preventDefault();
-		SqueezeBox.initialize();
-		SqueezeBox.fromElement(this, {
-			handler: 'iframe',
-			url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-marker-url',
-			size: {x: 800, y: 434}
-		});
-	});
-	
-	
-
-	jQuery('#wmx-marker-change-icon').click(function(event){
-		event.preventDefault();
-		SqueezeBox.initialize();
-		SqueezeBox.fromElement(this, {
-			handler: 'iframe',
-			url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-marker-icon',
-			size: {x: 800, y: 434}
-		});
-	});
-	
-	/*
-	jQuery('#wmx-kml-media').click(function(event){
-		event.preventDefault();
-		SqueezeBox.initialize();
-		SqueezeBox.fromElement(this, {
-			handler: 'iframe',
-			url: K2BasePath+'index.php?option=com_k2&view=media&type=image&tmpl=component&fieldID=wmx-kml-url',
-			size: {x: 800, y: 434}
-		});
-	});*/
-
-				
+ 			
 	jQuery('#wmx-address-geocode').click(function(event){
 	
 		wmx.address = jQuery('input#wmx-address-input').val();
@@ -177,7 +143,7 @@ jQuery(document).ready(function(){
 	});
 
 
-	jQuery("<div id='wmx-geocoder-launch'>GeoTagger</div>").insertAfter("#featured1");
+	jQuery("<div id='wmx-geocoder-launch'>GeoTag</div>").insertAfter("#jform_featured");
 
 	jQuery('#wmx-marker-label-input').keyup(function(e) {
 	
@@ -279,16 +245,12 @@ jQuery(document).ready(function(){
 		e.preventDefault();
 		
 		var loadDialog = function() {
-		
-			var legacy = jQuery('#wmx-legacy').val(),			
-				myOptions = {
+					
+			var	myOptions = {
 			          center: new google.maps.LatLng(43.243603, -79.889074),
 			          zoom: 8,
 			          mapTypeId: google.maps.MapTypeId.ROADMAP
 			        };
-			        
-			if(legacy)
-				alert("Old Geotagging data detected. Before you can use maps created through this tool, you must copy the old data from the K2 'Extra Fields' tab to the 'K2 Plugins' tab. Once this is done, delete the 'geo' Extra Fields Group in K2, then data created with this tool will be used and this message will no longer appear. If you need the 'geo' group for other purposes, please contact support for assistance.");
 			        
 			if(wmx.map instanceof google.maps.Map)
 			{
@@ -302,7 +264,7 @@ jQuery(document).ready(function(){
 			{
 				
 				wmx.map = new google.maps.Map(document.getElementById("wmx-map"), myOptions);
-				wmx.getSettings();
+				//wmx.getSettings();
 				
 			}
 				
@@ -335,13 +297,13 @@ jQuery(document).ready(function(){
 					wmx.saveSettings();
 					jQuery(this).dialog( "close" );
 					wmx.safeClose = false;
-				}		
+				},			
 			},
 			open: loadDialog(),
 			beforeClose: function() {
 			
 				if(wmx.safeClose == undefined || wmx.safeClose == false)
-					return confirm(Joomla.JText._('WEEVERMAPSK2_CONFIRM_CLOSE'));
+					return confirm(wmx._txt('WEEVERMAPS_CONFIRM_CLOSE'));
 			
 			}
 		}); 
