@@ -188,17 +188,6 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		if($geoData->weevermapsk2altitude_item == "wxdebug") 
 			jexit();
 		
-		/*
-		
-		// search code for distance...
-		
-		SELECT *,  glength( linestringfromwkb( linestring( GeomFromText('POINT(45.123 54.262)'), location ) ) ) as 'distance'
-		FROM
-		jos_weever_maps
-		ORDER BY
-		distance
-		
-		*/
 	
 	}
 
