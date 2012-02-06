@@ -151,7 +151,7 @@ jQuery(document).ready(function(){
 	});
 
 
-	jQuery("<div id='wmx-geocoder-launch'>GeoTag</div>").insertAfter("#jform_featured");
+	jQuery("<div id='wmx-geocoder-launch'>GeoTag</div>").insertAfter(wmx.launchAnchor);
 
 	jQuery('#wmx-marker-label-input').keyup(function(e) {
 	

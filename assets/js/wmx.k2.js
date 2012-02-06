@@ -1,4 +1,3 @@
-<?php
 /*	
 *	Weever Geotagger for K2
 *	(c) 2012 Weever Apps Inc. <http://www.weeverapps.com/>

@@ -46,12 +46,18 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		
 		$version = new JVersion;
 		$this->joomlaVersion = substr($version->getShortVersion(), 0, 3);
+
+		if( JRequest::getVar("view") == "item" && !JRequest::getVar("task") )
+			$this->displayButton();
+	
+		parent::__construct($subject, $params);
 		
-		if( JRequest::getVar("view") != "item" || JRequest::getVar("task") != "" )
-			return false;
-		
+	}
+	
+	private function displayButton() {
+	
 		// Javascript localization assignment. All localized Javascript strings must register here.
-		
+	
 		if($this->joomlaVersion == '1.5')
 		{
 
@@ -86,8 +92,6 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 			$legacy = 0;		
 		
 		include JPATH_PLUGINS.DS.'k2'.DS.'weevermapsk2'.DS.'view.html.php';
-		
-		parent::__construct($subject, $params);
 		
 	}
 

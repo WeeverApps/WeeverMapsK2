@@ -30,6 +30,8 @@ wmx.localText = {
 	
 };
 
+wmx.launchAnchor = "#featured1";
+
 // input fields for form
 wmx.inputField = {
 
