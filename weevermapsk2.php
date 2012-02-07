@@ -29,7 +29,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 	public 	$pluginNameHumanReadable;
 	public  $pluginVersion = "0.2";
 	public	$pluginLongVersion = "Version 0.2 \"Behaim\" (beta)";
-	public  $pluginReleaseDate = "January 24, 2012";
+	public  $pluginReleaseDate = "February 7, 2012";
 	public  $joomlaVersion;
 
 	public function __construct(&$subject, $params) 

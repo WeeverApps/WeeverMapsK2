@@ -29,8 +29,6 @@ jQuery(document).ready(function(){
 			size: {x: 800, y: 434}
 		});
 	});
-	
-	
 
 	jQuery('#wmx-marker-change-icon').click(function(event){
 		event.preventDefault();
@@ -61,11 +59,11 @@ jQuery(document).ready(function(){
 var _elFinderUpdate = elFinderUpdate;
 
 var elFinderUpdate = function(fieldID, value) {
+
+	var image = "/"+value;
 	
 	if(fieldID == 'wmx-marker-url') {
-	
-		var image = "/"+value;
-	
+
 		wmx.mapImages.icon = new google.maps.MarkerImage(
 		                image,
 		                new google.maps.Size(32, 37),
@@ -75,27 +73,22 @@ var elFinderUpdate = function(fieldID, value) {
 		              );
 		              
 		jQuery('#wmx-marker-image').attr('src', image); 
-		
-		_elFinderUpdate(fieldID, value);
 	
-	} else if (fieldID == 'wmx-marker-icon') {
+	} 
+	else if (fieldID == 'wmx-marker-icon') {
 	
 		wmx.selectedMarker.setIcon(	
 			new google.maps.MarkerImage(
-		        "/"+value,
+		        image,
 		        new google.maps.Size(32, 37),
 		        new google.maps.Point(0,0),
 		        new google.maps.Point(16, 37),
 		        new google.maps.Size(64, 37)
 		   )
 		);
-		
-		_elFinderUpdate(fieldID, value);
-	
-	} else {
-	
-		_elFinderUpdate(fieldID, value);
 	
 	}
+	
+	_elFinderUpdate(fieldID, value);
 
 };
