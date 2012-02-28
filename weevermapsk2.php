@@ -3,8 +3,8 @@
 *	Weever Maps for K2
 *	(c) 2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
-*	Author: 	Robert Gerald Porter (rob@weeverapps.com)
-*	Version: 	0.2
+*	Author: 	Robert Gerald Porter <rob@weeverapps.com>
+*	Version: 	0.2.1
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -27,17 +27,18 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 
 	public 	$pluginName = 'weevermapsk2';
 	public 	$pluginNameHumanReadable;
-	public  $pluginVersion = "0.2";
-	public	$pluginLongVersion = "Version 0.2 \"Behaim\" (beta)";
-	public  $pluginReleaseDate = "February 7, 2012";
+	public  $pluginVersion = "0.2.1";
+	public	$pluginLongVersion = "Version 0.2.1 \"Cabot\" (beta)";
+	public  $pluginReleaseDate = "February 28, 2012";
 	public  $joomlaVersion;
 
 	public function __construct(&$subject, $params) 
 	{
 		
-		$app =& JFactory::getApplication();
+		$app 			= &JFactory::getApplication();
+		$option 		= JRequest::getCmd('option');
 		
-		if( !$app->isAdmin() )
+		if( !$app->isAdmin()  || $option != "com_k2" )
 			return false;
 		
 		JPlugin::loadLanguage('plg_k2_'.$this->pluginName, JPATH_ADMINISTRATOR);

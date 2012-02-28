@@ -42,6 +42,16 @@ wmx.inputField = {
 	marker: '#pluginsweevermapsk2marker_item',
 	kml: '#pluginsweevermapsk2kml_item'
 
+};
+
+wmx.launchMessage = function() {
+
+	var legacy = jQuery('#wmx-legacy').val();
+	        
+	if(legacy)
+		alert("Old Geotagging data detected. Before you can use maps created through this tool, you must copy the old data from the K2 'Extra Fields' tab to the 'K2 Plugins' tab. Once this is done, delete the 'geo' Extra Fields Group in K2, then data created with this tool will be used and this message will no longer appear. If you need the 'geo' group for other purposes, please contact support for assistance.");
+	        
+
 }
 
 // definitions set at document ready
