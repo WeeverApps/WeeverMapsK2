@@ -23,22 +23,25 @@ defined('_JEXEC') or die;
 
 
 	$document = &JFactory::getDocument();
+	
+	$root_url = substr(JURI::root(), 0, strlen(JURI::root())-1);
+	
 	$document->addScript( 'http://maps.googleapis.com/maps/api/js?sensor=false' );
-	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'markerwithlabel.js' );
-	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.ini.js' );
-	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.js' );
-	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.k2.js' );
-	$document->addScript( '/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'jq.ready.js' );
+	$document->addScript( $root_url.'/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'markerwithlabel.js' );
+	$document->addScript( $root_url.'/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.ini.js' );
+	$document->addScript( $root_url.'/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.js' );
+	$document->addScript( $root_url.'/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'wmx.k2.js' );
+	$document->addScript( $root_url.'/media'.DS.'plg_weevermapsk2'.DS.'js'.DS.'jq.ready.js' );
 
-	$document->addStyleSheet(DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'wmx.css', 'text/css', null, array());
-	$document->addStyleSheet(DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'wmx.k2.css', 'text/css', null, array());
-	$document->addStyleSheet(DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'jquery.ui.css', 'text/css', null, array());
+	$document->addStyleSheet($root_url.DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'wmx.css', 'text/css', null, array());
+	$document->addStyleSheet($root_url.DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'wmx.k2.css', 'text/css', null, array());
+	$document->addStyleSheet($root_url.DS.'media'.DS.'plg_weevermapsk2'.DS.'css'.DS.'jquery.ui.css', 'text/css', null, array());
 
 ?>
 
 <input type='hidden' id='wmx-legacy' value='<?php echo $legacyMode; ?>'>
 
-<div id='wmx-dialog' class='wmx-ui' title='&lt;img id=&quot;wmx-logo&quot; src=&quot;/media/plg_weevermapsk2/images/weever.png&quot;&gt; <?php echo $this->pluginNameHumanReadable; ?> v<?php echo $this->pluginVersion; ?>'>
+<div id='wmx-dialog' class='wmx-ui' title='&lt;img id=&quot;wmx-logo&quot; src=&quot;<?php echo $root_url; ?>/media/plg_weevermapsk2/images/weever.png&quot;&gt; <?php echo $this->pluginNameHumanReadable; ?> v<?php echo $this->pluginVersion; ?>'>
 		<div id='wmx-address' class='wmx-ui'>
 			<input type='text' class='wmx-ui' id='wmx-address-input' placeholder='<?php echo JText::_('WEEVERMAPSK2_ADDRESS_PLACEHOLDER'); ?>' value='<?php echo JText::_('WEEVERMAPSK2_ADDRESS_VALUE'); ?>' />
 			<button class='wmx-ui' id='wmx-address-geocode'><?php echo JText::_('WEEVERMAPSK2_ADDRESS_GO'); ?></button> 
@@ -124,7 +127,7 @@ defined('_JEXEC') or die;
 	
 	<div id='wmx-about-plugin-dialog' class='wmx-ui' title='<?php echo JText::_('WEEVERMAPSK2_ABOUT_PLUGIN'); ?>'>
 	
-		<div id='wmx-about-logo' class='wmx-ui'><img src='/media/plg_weevermapsk2/images/weever-logo.png' class='wmx-ui' /></div>
+		<div id='wmx-about-logo' class='wmx-ui'><img src='<?php echo $root_url; ?>/media/plg_weevermapsk2/images/weever-logo.png' class='wmx-ui' /></div>
 		<h3 class='wmx-ui'><?php echo $this->pluginNameHumanReadable; ?>, <?php echo $this->pluginLongVersion; ?></h3>
 		<div id='wmx-about-text' class='wmx-ui'>
 			<?php echo JText::_('WEEVERMAPSK2_ABOUT_PLUGIN_TEXT'); ?>
