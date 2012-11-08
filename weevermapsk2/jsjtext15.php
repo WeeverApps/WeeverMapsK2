@@ -4,7 +4,7 @@
 *	(c) 2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter (rob@weeverapps.com)
-*	Version: 	0.1
+*	Version: 	0.3
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -68,7 +68,7 @@ class jsJText extends JText
 	{
 	
 		
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		
 		$document->addCustomTag (
 			'<script type="text/javascript">var strings = '.

@@ -4,7 +4,7 @@
 *	(c) 2012 Weever Apps Inc. <http://www.weeverapps.com/>
 *
 *	Author: 	Robert Gerald Porter <rob@weeverapps.com>
-*	Version: 	0.2.1
+*	Version: 	0.3
 *   License: 	GPL v3.0
 *
 *   This extension is free software: you can redistribute it and/or modify
@@ -21,21 +21,25 @@
 
 defined('_JEXEC') or die;
 
+# Joomla 3.0 nonsense
+if( !defined('DS') )
+	define( 'DS', DIRECTORY_SEPARATOR );
+
 JLoader::register('K2Plugin', JPATH_ADMINISTRATOR.DS.'components'.DS.'com_k2'.DS.'lib'.DS.'k2plugin.php');
 
 class plgK2WeeverMapsK2 extends K2Plugin {
 
-	public 	$pluginName = 'weevermapsk2';
+	public 	$pluginName 				= 'weevermapsk2';
 	public 	$pluginNameHumanReadable;
-	public  $pluginVersion = "0.2.1";
-	public	$pluginLongVersion = "Version 0.2.1 \"Cabot\" (beta)";
-	public  $pluginReleaseDate = "February 28, 2012";
+	public  $pluginVersion 				= "0.3";
+	public	$pluginLongVersion 			= "Version 0.3 \"Da Gama\" (beta)";
+	public  $pluginReleaseDate 			= "November 9, 2012";
 	public  $joomlaVersion;
 
 	public function __construct(&$subject, $params) 
 	{
 		
-		$app 			= &JFactory::getApplication();
+		$app 			= JFactory::getApplication();
 		$option 		= JRequest::getCmd('option');
 		
 		if( !$app->isAdmin()  || $option != "com_k2" )
@@ -82,7 +86,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		// detect old method of geotagging K2 content
 		// to fail detection, delete the "geo" Extra Field Group
 	
-		$db = &JFactory::getDBO();					
+		$db = JFactory::getDBO();					
 		$query = "SELECT * FROM #__k2_extra_fields_groups WHERE name = ".$db->Quote("geo");
 		$db->setQuery($query);
 		$results = @$db->loadObjectList();
@@ -134,7 +138,7 @@ class plgK2WeeverMapsK2 extends K2Plugin {
 		$geoLabelArray = 	explode( 	";", rtrim( $geoData->weevermapsk2label_item, 		";") 	);
 		$geoMarkerArray = 	explode( 	";", rtrim( $geoData->weevermapsk2marker_item, 		";") 	);
 		
-		$db = &JFactory::getDBO();
+		$db = JFactory::getDBO();
 		
 		$query = " 	DELETE FROM #__weever_maps 
 					WHERE

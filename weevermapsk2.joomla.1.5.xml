@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install type="plugin" version="1.5.0" group="k2" method="upgrade">
  <name>WEEVERMAPSK2_PLG_NAME</name>
- <creationDate>2012-02-28</creationDate>
+ <creationDate>2012-11-09</creationDate>
  <author>Robert Gerald Porter</author>
  <authorEmail>rob@weeverapps.com</authorEmail>
  <authorUrl>http://www.weeverapps.com/</authorUrl>
  <copyright>(c) 2012 Weever Apps Inc.</copyright>
  <license>GPLv3</license>
- <version>0.2.1</version>
+ <version>0.3</version>
  <releaseType>Stable</releaseType>
  <description>WEEVERMAPSK2_PLG_DESCRIPTION</description>
  <files>
