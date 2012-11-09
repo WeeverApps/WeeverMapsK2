@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="plugin" version="1.7" group="k2">
+<extension type="plugin" version="1.7" group="k2" method="upgrade">
 
  <name>WEEVERMAPSK2_PLG_NAME</name>
  <creationDate>2012-11-09</creationDate>
@@ -11,6 +11,8 @@
  <version>0.3</version>
  <releaseType>Stable</releaseType>
  <description>WEEVERMAPSK2_PLG_DESCRIPTION</description>
+ 
+ <scriptfile>weevermapsk2.install.php</scriptfile>
  
  <files>
 	<filename plugin="weevermapsk2">weevermapsk2.php</filename>
@@ -39,5 +41,11 @@
 	<folder>images</folder>
 	<filename>index.html</filename>
  </media>
+ 
+ <updateservers>
+ 
+ 	<server type="collection">http://weeverapps.com/download_files/weever_appbuilder.xml</server>
+ 	
+ </updateservers>
 
 </extension>
